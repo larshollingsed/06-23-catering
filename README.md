@@ -28,13 +28,13 @@ For example - I have 5 employees in my company.  In the last week my company has
 
 
 ### What we should be able to do
-  1 - add/delete/modify an employee
-  2 - add/delete/modify a event
-  3 - attach one or many events to one or many employees
-  4 - calculate how much an employee earned (possibly over a given time period)
-  5 - calculate how many hours an employee worked (possibly over a given time       period)
+  * - add/delete/modify an employee
+  * - add/delete/modify a event
+  * - attach one or many events to one or many employees
+  * - calculate how much an employee earned (possibly over a given time period)
+  * - calculate how many hours an employee worked (possibly over a given time       period)
 
 ### What we should not be able to do
-  1 - add an employee who is under 19 to an alcohol serving event
-  2 - have more than one manager attached to a event
-  3 - split tips with a manager
+  * - add an employee who is under 19 to an alcohol serving event
+  * - have more than one manager attached to a event
+  * - split tips with a manager
