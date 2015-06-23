@@ -5,10 +5,11 @@ class Event
   extend DatabaseClassMethods
   include DatabaseInstanceMethods
 
-  attr_accessor :id, :date, :hours, :hourly_wage, :gratuity, :alcohol
+  attr_accessor :id, :name, :date, :hours, :hourly_wage, :gratuity, :alcohol
 
   def initialize(args={})
     @id = args["id"]
+    @name = args["name"]
     @date = args["date"]
     @hours = args["hours"]
     @hourly_wage = args["hourly_wage"]

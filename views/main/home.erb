@@ -1,3 +1,7 @@
+<% if @event_added %>
+  <%= @event_added.name %> has been added
+<% end %>
+
 <h1>
   What would you like to do?
 </h1>
@@ -17,6 +21,11 @@
 </a>
 <br>
 
-<a href="modify_employee_form">
+<a href="/modify_employee_form">
   Modify an employee
+</a>
+<br>
+
+<a href="/add_event">
+  Add an event
 </a>
