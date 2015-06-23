@@ -1,0 +1,21 @@
+<h1>
+  Which employee would you like to modify?
+</h1>
+
+<form action="modify_employee_form2">
+  <table>
+    <% Employee.all.each do |x| %>
+      <tr>
+        <td>
+          <label for="<%= x.id %>">
+          <input type="radio" id="<%= x.id %>" value="<%= x.id %>" name="id"><%= x.name %>
+        </td>
+        <td>
+          <%= x.age %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <br>
+  <input type="submit">
+</form>
