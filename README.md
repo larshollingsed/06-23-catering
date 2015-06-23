@@ -28,8 +28,12 @@ For example - I have 5 employees in my company.  In the last week my company has
 
 
 ### What we should be able to do
-  * - add/delete/modify an employee
-  * - add/delete/modify a event
+  * - add an employee
+  * - delete an employee
+  * - modify an employee
+  * - add an event
+  * - delete an event
+  * - modify an event
   * - attach one or many events to one or many employees
   * - calculate how much an employee earned (possibly over a given time period)
   * - calculate how many hours an employee worked (possibly over a given time       period)
