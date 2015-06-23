@@ -7,7 +7,7 @@
       Name
     </td>
     <td>
-      Age
+      Able to serve alcohol?
     </td>
   </tr>
   <% Employee.all.each do |x| %>
@@ -19,7 +19,11 @@
         <%= x.name %>
       </td>
       <td>
-        <%= x.age %>
+        <% if x.can_serve_booze? %>
+          Yes
+        <% else %>
+          No
+        <% end %>
       </td>
     </tr>
   <% end %>

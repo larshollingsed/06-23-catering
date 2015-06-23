@@ -12,6 +12,11 @@ class Employee
     @name = args["name"]
     @age = args["age"]
   end
-  
+
+# If the Employee is 19 or older they can serve alcohol
+# Returns True/False  
+  def can_serve_booze?
+    @age >= 19
+  end
   
 end
