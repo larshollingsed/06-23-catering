@@ -16,6 +16,7 @@ get "/delete_employee_form" do
 end
 
 get "/delete_employee_confirm" do
+  @employee_deleted = Employee.find(params["id"])
   Employee.find(params["id"]).delete
   erb :"/main/home"
 end
@@ -29,7 +30,7 @@ get "/modify_employee_form2" do
 end
 
 get "/modify_employee_confirm" do
-  updated_employee = Employee.new("id" => params["id"].to_i, "name" => params["name"], "age" => params["age"].to_i)
-  updated_employee.save
+  @employee_modified = Employee.new("id" => params["id"].to_i, "name" => params["name"], "age" => params["age"].to_i)
+  @employee_modified.save
   erb :"/main/home"
 end
