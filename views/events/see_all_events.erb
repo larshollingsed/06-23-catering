@@ -1,0 +1,53 @@
+<h1>
+  All Events
+</h1>
+
+<table>
+  <tr>
+    <td>
+      Name
+    </td>
+    <td>
+      Date
+    </td>
+    <td>
+      Hours
+    </td>
+    <td>
+      Hourly Wage
+    </td>
+    <td>
+      Gratuity
+    </td>
+    <td>
+      Was alcohol served?
+    </td>
+  </tr>
+  <% Event.all.each do |x| %>
+    <tr>
+      <td>
+        <%= x.name %>
+      </td>
+      <td>
+        <%= x.date %>
+      </td>
+      <td>
+        <%= x.hours %>
+      </td>
+      <td>
+        <%= x.hourly_wage %>
+      </td>
+      <td>
+        <%= x.gratuity %>
+      </td>
+      <td>
+        <% if x.alcohol %>
+          Yes
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<br>
+<br>
+<a href="/home">Return to main menu</a>
