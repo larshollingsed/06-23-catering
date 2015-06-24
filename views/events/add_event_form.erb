@@ -21,6 +21,28 @@
         <input type="radio" name="alcohol" value="no">No
     </li>
   </ul>
+  
+  <table>
+    <tr>
+      <td>
+        Name
+      </td>
+      <td>
+        Manager?
+      </td>
+    </tr>
+    <% Employee.all.each do |x| %>
+      <tr>
+        <td>
+          <input type="checkbox" name="employee_id[]" value="<%= x.id %>">
+            <%= x.name %>
+        </td>
+        <td>
+            <input type="radio" name="manager" value="<%= x.id %>">
+        </td>
+      </tr>
+    <% end %>
+  </table>
   <input type="submit">
 </form>
       

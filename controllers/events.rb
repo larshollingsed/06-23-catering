@@ -4,6 +4,13 @@ end
 
 get"/add_event_confirm" do
   @event_added = Event.add("name" => params["name"], "date" => params["date"], "hours" => params["hours"].to_f, "hourly_wage" => params["hourly_wage"].to_f, "gratuity" => params["gratuity"].to_f, "alcohol" => params["alcohol"])
+  params["employee_id"].each do |x|
+    if params["manager"] == x
+      Distribution.add({"event_id" => @event_added.id, "employee_id" => x.to_i, "manager" => "yes"})
+    else
+      Distribution.add({"event_id" => @event_added.id, "employee_id" => x.to_i})
+    end
+  end
   erb :"/main/home"
 end
 
