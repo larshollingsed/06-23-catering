@@ -25,6 +25,7 @@ end
 get "/delete_event_confirm" do
   @event_deleted = Event.find(params["id"])
   @event_deleted.delete
+  DB.execute("DELETE * FROM distributions where event_id = @event_deleted.id")
   erb :"/main/home"
 end
 

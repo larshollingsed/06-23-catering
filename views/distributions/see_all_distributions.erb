@@ -2,30 +2,38 @@
   Distributions
 </h1>
 
+
+<% join = DB.execute("SELECT employees.name, events.name AS event_name, events.date, distributions.manager FROM distributions INNER JOIN employees ON distributions.employee_id = employees.id INNER JOIN events ON distributions.event_id = events.id") %>
 <table>
   <tr>
     <td>
-      Employee ID
+      Employee
     </td>
     <td>
-      Event ID
+      Event
+    </td>
+    <td>
+      Date
     </td>
     <td>
       Manager?
     </td>
   </tr>
-  <% Distribution.all.each do |x| %>
-  <tr>
-    <td>
-      <%= x.employee_id %>
-    </td>
-    <td>
-      <%= x.event_id %>
-    </td>
-    <td>
-      <%= x.manager %>
-    </td>
-  </tr>
+  <% join.each do |x| %>
+    <tr>
+      <td>
+        <%= x["name"] %>
+      </td>
+      <td>
+        <%= x["event_name"] %>
+      </td>
+      <td>
+        <%= x["date"] %>
+      </td>
+      <td>
+        <%= x["manager"] %>
+      </td>
+    </tr>
   <% end %>
 </table>
 
