@@ -1,0 +1,42 @@
+<% x = Event.find(params["id"]) %>
+<h1>
+  Modify this event and click submit
+</h1>
+
+<form action="modify_event_confirm">
+  <ul>
+    <input type="hidden" name="id" value="<%= x.id %>">
+    <li> 
+      Name - <input type="text" name="name" value="<%= x.name %>">
+    </li>
+    <li>
+      Date - <input type="text" name="date" value="<%= x.date %>">
+    </li>
+    <li>
+      Hours - <input type="number" step="0.25" name="hours" value="<%= x.hours %>">
+    </li>
+    <li>
+      Hourly Wage - <input type="number" step="0.05" name="hourly_wage" value="<%= x.hourly_wage %>">
+    </li>
+    <li>
+      Gratuity - <input type="number" name="gratuity" value="<%= x.gratuity %>">
+    </li>
+    <li>
+      Was alcohol served? - 
+        <input type="radio" name="alcohol" value="yes" 
+          <% if x.alcohol == "yes" %> 
+            checked 
+          <% end %> 
+          >
+        Yes
+        <input type="radio" name="alcohol" value="no" 
+          <% if x.alcohol != "yes" %> 
+            checked 
+          <% end %>
+          >
+        No
+      </li>
+  </ul>
+  <br>
+  <input type="submit">  
+</form>

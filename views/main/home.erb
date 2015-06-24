@@ -18,6 +18,10 @@
   An event, <%= @event_deleted.name %>, has been deleted
 <% end %>
 
+<% if @event_modified %>
+  An event, <%= @event_modified.name %>, has been modified
+<% end %>
+
 <h1>
   What would you like to do?
 </h1>

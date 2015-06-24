@@ -1,0 +1,59 @@
+<h1>
+  Which event would you like to modify?
+</h1>
+
+<table>
+  <tr>
+    <td>
+      Name
+    </td>
+    <td>
+      Date
+    </td>
+    <td>
+      Hours
+    </td>
+    <td>
+      Hourly Wage
+    </td>
+    <td>
+      Gratuity
+    </td>
+    <td>
+      Was alcohol served?
+    </td>
+  </tr>
+  <form action="/modify_event_form2">
+    <% Event.all.each do |x| %>
+      <tr>
+        <td>
+          <label for="<%= x.id %>">
+          <input type="radio" value="<%= x.id %>" id="<%= x.id %>" name="id">
+          <%= x.name %>
+        </td>
+        <td>
+          <%= x.date %>
+        </td>
+        <td>
+          <%= x.hours %>
+        </td>
+        <td>
+          <%= x.hourly_wage %>
+        </td>
+        <td>
+          <%= x.gratuity %>
+        </td>
+        <td>
+          <% if x.alcohol == "yes" %>
+            Yes
+          <% else %>
+            No
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+</table>
+<br>
+<br>
+<input type="submit">
+</form>
