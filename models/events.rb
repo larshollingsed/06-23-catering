@@ -16,4 +16,9 @@ class Event
     @gratuity = args["gratuity"]
     @alcohol = args["alcohol"]
   end
+  
+  def calc_base_wage
+    @hours * @hourly_wage
+  end
+  
 end
