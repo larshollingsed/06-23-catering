@@ -36,5 +36,41 @@
     </tr>
   <% end %>
 </table>
-
+<br>
+<br>
+<h3>
+  Employee Earnings
+</h3>
+<table>
+  <tr>
+    <td>
+      Name
+    </td>
+    <td>
+      Manager Wages
+    </td>
+    <td>
+      Non-Manager Wages
+    </td>
+    <td>
+      Total Earnings
+    </td>
+  </tr>
+  <% Employee.all.each do |x| %>
+    <tr>
+      <td>
+        <%= x.name %>
+      </td>
+      <td>
+        <%= x.get_manager_wages %>
+      </td>
+      <td>
+        <%= x.get_base_wages %>
+      </td>
+      <td>
+        <%= x.get_total_wages %>
+      </td>
+    </tr>
+  <% end %>
+</table>
 <a href="/home"> Return to the main menu </a>
