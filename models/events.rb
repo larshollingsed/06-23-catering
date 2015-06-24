@@ -17,6 +17,12 @@ class Event
     @alcohol = args["alcohol"]
   end
   
+  # Checks to see if the event served alcohol
+  # Returns True/False
+  def has_alcohol?
+    @alcohol == "yes"
+  end
+  
   # Calculates the base wage for non-manager for an event
   # Returns a Float
   def calc_base_wage

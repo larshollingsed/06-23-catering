@@ -25,7 +25,7 @@ end
 get "/delete_event_confirm" do
   @event_deleted = Event.find(params["id"])
   @event_deleted.delete
-  DB.execute("DELETE * FROM distributions where event_id = @event_deleted.id")
+  DB.execute("DELETE FROM distributions WHERE event_id = #{@event_deleted.id}")
   erb :"/main/home"
 end
 
@@ -39,10 +39,9 @@ end
 
 get "/modify_event_confirm" do
   @event_modified = Event.new("id" => params["id"].to_i, "name" => params["name"], "date" => params["date"], "hours" => params["hours"].to_f, "hourly_wage" => params["hourly_wage"].to_f, "gratuity" => params["gratuity"].to_f, "alcohol" => params["alcohol"])
+  
   @event_modified.save
   
-  
-  #TODO - delete all rows from distributions where event_id = @event_modified.id
   DB.execute("DELETE FROM distributions where event_id = #{@event_modified.id};")
   
   params["employee_id"].each do |x|
@@ -52,5 +51,6 @@ get "/modify_event_confirm" do
       Distribution.add({"event_id" => @event_modified.id, "employee_id" => x.to_i})
     end
   end
+  
   erb :"/main/home"
 end
