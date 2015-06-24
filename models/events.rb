@@ -17,14 +17,20 @@ class Event
     @alcohol = args["alcohol"]
   end
   
+  # Calculates the base wage for non-manager for an event
+  # Returns a Float
   def calc_base_wage
     @hours * @hourly_wage
   end
   
+  # Calculates the manager wage for an event
+  # Returns a Float
   def calc_manager_wage
     @hours * @hourly_wage * 2
   end
   
+  # Splits the gratuity depending on how many non-managers worked the event
+  # Returns a Float
   def split_gratuity
     non_managers = DB.execute("SELECT employee_id FROM distributions WHERE event_id = #{@id} AND manager is null")
     @gratuity / non_managers.count

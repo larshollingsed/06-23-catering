@@ -52,7 +52,8 @@ class Employee
     end
     wages
   end
-  
+  # Calculates total wages earn
+  # Return a Float
   def get_total_wages
     self.get_base_wages + self.get_manager_wages
   end
