@@ -2,16 +2,20 @@
   A new employee, <%= @employee_added.name %>, has been added
 <% end %>
 
-<% if @event_added %>
-  <%= @event_added.name %> has been added
-<% end %>
-
 <% if @employee_deleted %>
   An employee, <%= @employee_deleted.name %>, has been deleted
 <% end %>
 
 <% if @employee_modified %>
   An employee, <%= @employee_modified.name %>, has been modified
+<% end %>
+
+<% if @event_added %>
+  An event, <%= @event_added.name %>, has been added
+<% end %>
+
+<% if @event_deleted %>
+  An event, <%= @event_deleted.name %>, has been deleted
 <% end %>
 
 <h1>

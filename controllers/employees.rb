@@ -17,12 +17,12 @@ end
 
 get "/delete_employee_confirm" do
   @employee_deleted = Employee.find(params["id"])
-  Employee.find(params["id"]).delete
+  @employee_deleted.delete
   erb :"/main/home"
 end
 
-get "/modify_employee_form" do
-  erb :"/employees/modify_employee_form"
+get "/modify_employee_form1" do
+  erb :"/employees/modify_employee_form1"
 end
 
 get "/modify_employee_form2" do
