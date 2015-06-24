@@ -1,36 +1,46 @@
-<% x = Event.find(params["id"]) %>
+<% event = Event.find(params["id"])
+
+employees_worked = []
+
+DB.execute("SELECT employee_id FROM distributions WHERE event_id = #{event.id};").each do |x|
+  employees_worked << x["employee_id"]
+end
+
+manager_id = DB.execute("SELECT employee_id FROM distributions WHERE manager = 'yes' and event_id = 2;")[0]["employee_id"]
+
+%>
 <h1>
   Modify this event and click submit
 </h1>
 
 <form action="modify_event_confirm">
   <ul>
-    <input type="hidden" name="id" value="<%= x.id %>">
+    <input type="hidden" name="id" value="<%= event.id %>">
     <li> 
-      Name - <input type="text" name="name" value="<%= x.name %>">
+      Name - <input type="text" name="name" value="<%= event.name %>">
     </li>
     <li>
-      Date - <input type="text" name="date" value="<%= x.date %>">
+      Date - <input type="text" name="date" value="<%= event.date %>">
     </li>
     <li>
-      Hours - <input type="number" step="0.25" name="hours" value="<%= x.hours %>">
+      Hours - <input type="number" step="0.25" name="hours" value="<%= event.hours %>">
     </li>
     <li>
-      Hourly Wage - <input type="number" step="0.05" name="hourly_wage" value="<%= x.hourly_wage %>">
+      Hourly Wage - <input type="number" step="0.05" name="hourly_wage" value="<%= event.hourly_wage %>">
     </li>
     <li>
-      Gratuity - <input type="number" name="gratuity" value="<%= x.gratuity %>">
+      Gratuity - <input type="number" name="gratuity" value="<%= event.gratuity %>">
     </li>
     <li>
       Was alcohol served? - 
         <input type="radio" name="alcohol" value="yes" 
-          <% if x.alcohol == "yes" %> 
+          <% if event.alcohol == "yes" %> 
             checked 
           <% end %> 
           >
         Yes
         <input type="radio" name="alcohol" value="no" 
-          <% if x.alcohol != "yes" %> 
+          <% if event.alcohol != "yes" %> 
             checked 
           <% end %>
           >
@@ -38,5 +48,38 @@
       </li>
   </ul>
   <br>
+  <br>
+  <table>
+    <tr>
+      <td>
+        Name
+      </td>
+      <td>
+        Manager?
+      </td>
+    </tr>
+    <% Employee.all.each do |x| %>
+      <tr>
+        <td>
+          <% if event.alcohol == "yes" %>
+            <% if x.can_serve_booze? %>
+              <input type="checkbox" name="employee_id[]" value="<%= x.id %>" <% if employees_worked.include?(x.id) %> checked <% end %>>
+              <%= x.name %>
+            </td>
+            <td>
+              <input type="radio" name="manager" value="<%= x.id %>" <% if manager_id == x.id %> checked <% end %>>
+            <% else %>
+              <%= x.name %> is not old enough to work at this event
+            <% end %>
+          <% else %>
+            <input type="checkbox" name="employee_id[]" value="<%= x.id %>" <% if employees_worked.include?(x.id) %> checked <% end %>>
+              <%= x.name %>
+            </td>
+            <td>
+              <input type="radio" name="manager" value="<%= x.id %>" <% if manager_id == x.id %> checked <% end %>>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
   <input type="submit">  
 </form>
