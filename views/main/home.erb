@@ -22,6 +22,10 @@
   An event, <%= @event_modified.name %>, has been modified
 <% end %>
 
+<% if @distribution_added %>
+  A shift has been distributed to an employee
+<% end %>
+
 <h1>
   What would you like to do?
 </h1>
@@ -63,4 +67,14 @@
 
 <a href="/modify_event_form1">
   Modify an event
+</a>
+<br>
+
+<a href="/see_all_distributions">
+  See all distributions
+</a>
+<br>
+
+<a href="/distribute_employees_to_event_form1">
+  Distribute employees to an event
 </a>

@@ -1,0 +1,32 @@
+<h1>
+  Distributions
+</h1>
+
+<table>
+  <tr>
+    <td>
+      Employee ID
+    </td>
+    <td>
+      Event ID
+    </td>
+    <td>
+      Manager?
+    </td>
+  </tr>
+  <% Distribution.all.each do |x| %>
+  <tr>
+    <td>
+      <%= x.employee_id %>
+    </td>
+    <td>
+      <%= x.event_id %>
+    </td>
+    <td>
+      <%= x.manager %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+
+<a href="/home"> Return to the main menu </a>
