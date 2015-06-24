@@ -40,11 +40,23 @@
     <% Employee.all.each do |x| %>
     <tr>
       <td>
-        <input type="checkbox" name="employee_id[]" value="<%= x.id %>">
-        <%= x.name %>
-      </td>
-      <td>
-        <input type="radio" name="manager" value="<%= x.id %>">
+        <% if event.alcohol == "yes" %>
+          <% if x.can_serve_booze? %>
+            <input type="checkbox" name="employee_id[]" value="<%= x.id %>">
+            <%= x.name %>
+          </td>
+          <td>
+            <input type="radio" name="manager" value="<%= x.id %>">
+          <% else %>
+            <%= x.name %> is not old enough to work at this event
+          <% end %>
+        <% else %>
+          <input type="checkbox" name="employee_id[]" value="<%= x.id %>">
+            <%= x.name %>
+          </td>
+          <td>
+            <input type="radio" name="manager" value="<%= x.id %>">
+        <% end %>
       </td>
     </tr>
   <% end %>
