@@ -1,3 +1,12 @@
+<% if @of_age == false
+  params["employee_id"].each do |x|
+    employee = Employee.find(x)
+    if employee.can_serve_booze? == false %>
+      <%= employee.name %> is underage and is not allowed to work at an event  which serves alcohol.
+    <% end %>
+  <% end %>
+<% end %>
+
 <form action="/add_event_confirm">
   <ul>
     <li>

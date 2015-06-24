@@ -3,15 +3,28 @@ get "/add_event" do
 end
 
 get"/add_event_confirm" do
-  @event_added = Event.add("name" => params["name"], "date" => params["date"], "hours" => params["hours"].to_f, "hourly_wage" => params["hourly_wage"].to_f, "gratuity" => params["gratuity"].to_f, "alcohol" => params["alcohol"])
-  params["employee_id"].each do |x|
-    if params["manager"] == x
-      Distribution.add({"event_id" => @event_added.id, "employee_id" => x.to_i, "manager" => "yes"})
-    else
-      Distribution.add({"event_id" => @event_added.id, "employee_id" => x.to_i})
+  @of_age = true
+  if params["alcohol"] == "yes"
+    params["employee_id"].each do |x|
+      employee = Employee.find(x)
+      if employee.can_serve_booze? == false
+        @of_age = false
+      end
     end
   end
-  erb :"/main/home"
+  if @of_age
+    @event_added = Event.add("name" => params["name"], "date" => params["date"], "hours" => params["hours"].to_f, "hourly_wage" => params["hourly_wage"].to_f, "gratuity" => params["gratuity"].to_f, "alcohol" => params["alcohol"])
+    params["employee_id"].each do |x|
+      if params["manager"] == x
+        Distribution.add({"event_id" => @event_added.id, "employee_id" => x.to_i, "manager" => "yes"})
+      else
+        Distribution.add({"event_id" => @event_added.id, "employee_id" => x.to_i})
+      end
+    end
+    erb :"/main/home"
+  else
+    erb :"/events/add_event_form"
+  end
 end
 
 get "/see_all_events" do
