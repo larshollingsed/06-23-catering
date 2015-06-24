@@ -41,8 +41,10 @@
         <%= x.gratuity %>
       </td>
       <td>
-        <% if x.alcohol %>
+        <% if x.alcohol == "yes"%>
           Yes
+        <% else %>
+          No
         <% end %>
       </td>
     </tr>
