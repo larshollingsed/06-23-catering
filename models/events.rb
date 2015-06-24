@@ -21,4 +21,13 @@ class Event
     @hours * @hourly_wage
   end
   
+  def calc_manager_wage
+    @hours * @hourly_wage * 2
+  end
+  
+  def split_gratuity
+    non_managers = DB.execute("SELECT employee_id FROM distributions WHERE event_id = #{@id} AND manager is null")
+    @gratuity / non_managers.count
+  end
+  
 end

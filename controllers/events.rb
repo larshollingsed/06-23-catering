@@ -3,7 +3,7 @@ get "/add_event" do
 end
 
 get"/add_event_confirm" do
-  @event_added = Event.add("name" => params["name"], "date" => params["date"], "hours" => params["hours"].to_f, "hourly_wage" => params["hourly_wage"].to_f, "gratuity" => params["gratuity"].to_i, "alcohol" => params["alcohol"])
+  @event_added = Event.add("name" => params["name"], "date" => params["date"], "hours" => params["hours"].to_f, "hourly_wage" => params["hourly_wage"].to_f, "gratuity" => params["gratuity"].to_f, "alcohol" => params["alcohol"])
   erb :"/main/home"
 end
 
@@ -30,7 +30,7 @@ get "/modify_event_form2" do
 end
 
 get "/modify_event_confirm" do
-  @event_modified = Event.new("id" => params["id"].to_i, "name" => params["name"], "date" => params["date"], "hours" => params["hours"].to_f, "hourly_wage" => params["hourly_wage"].to_f, "gratuity" => params["gratuity"].to_i, "alcohol" => params["alcohol"])
+  @event_modified = Event.new("id" => params["id"].to_i, "name" => params["name"], "date" => params["date"], "hours" => params["hours"].to_f, "hourly_wage" => params["hourly_wage"].to_f, "gratuity" => params["gratuity"].to_f, "alcohol" => params["alcohol"])
   @event_modified.save
   erb :"/main/home"
 end
