@@ -1,3 +1,6 @@
+<!-- Checks to see if the user was sent back to this page becuase they -->
+<!--   tried to add an underage employee to an event with alcohol -->
+<!-- Gives them a message telling them who they tried to add who was underage-->
 <% if @of_age == false
   params["employee_id"].each do |x|
     employee = Employee.find(x)
@@ -43,6 +46,8 @@
     <% Employee.all.each do |x| %>
       <tr>
         <td>
+          <!-- Each employee generates a row with a checkbox for if they -->
+          <!-- and a radio button to signify one manager for the event -->
           <input type="checkbox" name="employee_id[]" value="<%= x.id %>">
             <%= x.name %>
         </td>

@@ -1,11 +1,14 @@
+<!-- Makes 'event' the specific event we are working with -->
 <% event = Event.find(params["id"])
 
 employees_worked = []
 
+# gets employees who were designated as working this event previously
 DB.execute("SELECT employee_id FROM distributions WHERE event_id = #{event.id};").each do |x|
   employees_worked << x["employee_id"]
 end
 
+# Gets the id of the employee who managed this event
 manager_id = DB.execute("SELECT employee_id FROM distributions WHERE manager = 'yes' and event_id = 2;")[0]["employee_id"]
 
 %>
@@ -13,6 +16,7 @@ manager_id = DB.execute("SELECT employee_id FROM distributions WHERE manager = '
   Modify this event and click submit
 </h1>
 
+<!-- Populates the form with the event info previously provided -->
 <form action="modify_event_confirm">
   <ul>
     <input type="hidden" name="id" value="<%= event.id %>">
@@ -61,6 +65,9 @@ manager_id = DB.execute("SELECT employee_id FROM distributions WHERE manager = '
     <% Employee.all.each do |x| %>
       <tr>
         <td>
+          <!-- If the event serves alcohol this checks to make sure which -->
+          <!--   employees can work it -->
+          <!-- Also pre-checks the employees who were designated previously -->
           <% if event.alcohol == "yes" %>
             <% if x.can_serve_booze? %>
               <input type="checkbox" name="employee_id[]" value="<%= x.id %>" <% if employees_worked.include?(x.id) %> checked <% end %>>
@@ -68,6 +75,8 @@ manager_id = DB.execute("SELECT employee_id FROM distributions WHERE manager = '
             </td>
             <td>
               <input type="radio" name="manager" value="<%= x.id %>" <% if manager_id == x.id %> checked <% end %>>
+            <!-- Instead of the normal employee selection row this notifies -->
+            <!--   the user that this employee can't serve alcohol -->
             <% else %>
               <%= x.name %> is not old enough to work at this event
             <% end %>
