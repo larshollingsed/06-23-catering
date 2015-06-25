@@ -63,6 +63,7 @@ class Employee
   # month - Integer of the month number
   # Returns a Float
   def get_base_wages_for_month(month)
+    
     # events_worked is an Array containing rows where this employee worked
     events_worked = DB.execute("SELECT event_id FROM distributions WHERE employee_id = #{@id} AND manager is null;")
     
@@ -131,4 +132,41 @@ class Employee
   def get_total_wages_for_month(month)
     self.get_base_wages_for_month(month) + self.get_manager_wages_for_month(month)
   end
+  
+  def get_hours_for_month(month)
+    # events_worked is an Array containing rows where this employee worked
+    events_worked = DB.execute("SELECT event_id FROM distributions WHERE employee_id = #{@id};")
+    
+    # Creates an Array of the event.ids of events in a specific month
+    events_in_month = []
+    Event.in_month(month).each do |x|
+      events_in_month << x.id
+    end
+    
+    # This pulls out just the event_id from the Array from the database
+    set_of_events = []
+    events_worked.each do |x|
+      set_of_events << x["event_id"].to_i
+    end
+    
+    # This uses "&" (intersection) to compare the event ids from the month
+    #   and the events the employee has worked
+    # events_employee_worked_this_month is an Array of event ids
+    events_employee_worked_this_month = set_of_events & events_in_month
+    
+    # Turns the Array of event ids into an Array of Event objects
+    paid_events = []
+    events_employee_worked_this_month.each do |x|
+      paid_events << Event.find(x)
+    end
+    
+    hours = 0
+    paid_events.each do |x|
+      hours += x.hours
+    end
+    hours
+  end
+  
+  
+  
 end
