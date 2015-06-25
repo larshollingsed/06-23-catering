@@ -62,15 +62,15 @@ end
 
 # Modifies an events and its associated rows in distributions
 get "/modify_event_confirm" do
-  @event_modified = Event.new("id" => params["id"].to_i, "name" => params["name"], "date" => params["date"], "hours" => params["hours"].to_f, "hourly_wage" => params["hourly_wage"].to_f, "gratuity" => params["gratuity"].to_f, "alcohol" => params["alcohol"])
+  @event_modified = Event.new("id" => params["event"]["id"].to_i, "name" => params["event"]["name"], "date" => params["event"]["date"], "hours" => params["event"]["hours"].to_f, "hourly_wage" => params["event"]["hourly_wage"].to_f, "gratuity" => params["event"]["gratuity"].to_f, "alcohol" => params["event"]["alcohol"])
   
   @event_modified.save
   
   DB.execute("DELETE FROM distributions where event_id = #{@event_modified.id};")
-  
+  binding.pry
   # Adds new rows to distributions, including checking for manager
-  params["employee_id"].each do |x|
-    if params["manager"] == x
+  params["event"]["employee_id"].each do |x|
+    if params["event"]["manager"] == x
       Distribution.add({"event_id" => @event_modified.id, "employee_id" => x.to_i, "manager" => "yes"})
     else
       Distribution.add({"event_id" => @event_modified.id, "employee_id" => x.to_i})

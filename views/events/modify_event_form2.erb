@@ -1,5 +1,5 @@
 <!-- Makes 'event' the specific event we are working with -->
-<% event = Event.find(params["id"])
+<% event = Event.find(params["event"]["id"])
 
 employees_worked = []
 
@@ -9,7 +9,7 @@ DB.execute("SELECT employee_id FROM distributions WHERE event_id = #{event.id};"
 end
 
 # Gets the id of the employee who managed this event
-manager_id = DB.execute("SELECT employee_id FROM distributions WHERE manager = 'yes' and event_id = 2;")[0]["employee_id"]
+manager_id = DB.execute("SELECT employee_id FROM distributions WHERE manager = 'yes' and event_id = #{event.id};")[0]["employee_id"]
 
 %>
 <h1>
@@ -19,31 +19,31 @@ manager_id = DB.execute("SELECT employee_id FROM distributions WHERE manager = '
 <!-- Populates the form with the event info previously provided -->
 <form action="modify_event_confirm">
   <ul>
-    <input type="hidden" name="id" value="<%= event.id %>">
+    <input type="hidden" name="event[id]" value="<%= event.id %>">
     <li> 
-      Name - <input type="text" name="name" value="<%= event.name %>">
+      Name - <input type="text" name="event[name]" value="<%= event.name %>">
     </li>
     <li>
-      Date - <input type="text" name="date" value="<%= event.date %>">
+      Date - <input type="text" name="event[date]" value="<%= event.date %>">
     </li>
     <li>
-      Hours - <input type="number" step="0.25" name="hours" value="<%= event.hours %>">
+      Hours - <input type="number" step="0.25" name="event[hours]" value="<%= event.hours %>">
     </li>
     <li>
-      Hourly Wage - <input type="number" step="0.05" name="hourly_wage" value="<%= event.hourly_wage %>">
+      Hourly Wage - <input type="number" step="0.05" name="event[hourly_wage]" value="<%= event.hourly_wage %>">
     </li>
     <li>
-      Gratuity - <input type="number" name="gratuity" value="<%= event.gratuity %>">
+      Gratuity - <input type="number" name="event[gratuity]" value="<%= event.gratuity %>">
     </li>
     <li>
       Was alcohol served? - 
-        <input type="radio" name="alcohol" value="yes" 
+        <input type="radio" name="event[alcohol]" value="yes" 
           <% if event.alcohol == "yes" %> 
             checked 
           <% end %> 
           >
         Yes
-        <input type="radio" name="alcohol" value="no" 
+        <input type="radio" name="event[alcohol]" value="no" 
           <% if event.alcohol != "yes" %> 
             checked 
           <% end %>
@@ -70,22 +70,22 @@ manager_id = DB.execute("SELECT employee_id FROM distributions WHERE manager = '
           <!-- Also pre-checks the employees who were designated previously -->
           <% if event.alcohol == "yes" %>
             <% if x.can_serve_booze? %>
-              <input type="checkbox" name="employee_id[]" value="<%= x.id %>" <% if employees_worked.include?(x.id) %> checked <% end %>>
+              <input type="checkbox" name="event[employee_id][]" value="<%= x.id %>" <% if employees_worked.include?(x.id) %> checked <% end %>>
               <%= x.name %>
             </td>
             <td>
-              <input type="radio" name="manager" value="<%= x.id %>" <% if manager_id == x.id %> checked <% end %>>
+              <input type="radio" name="event[manager]" value="<%= x.id %>" <% if manager_id == x.id %> checked <% end %>>
             <!-- Instead of the normal employee selection row this notifies -->
             <!--   the user that this employee can't serve alcohol -->
             <% else %>
               <%= x.name %> is not old enough to work at this event
             <% end %>
           <% else %>
-            <input type="checkbox" name="employee_id[]" value="<%= x.id %>" <% if employees_worked.include?(x.id) %> checked <% end %>>
+            <input type="checkbox" name="event[employee_id][]" value="<%= x.id %>" <% if employees_worked.include?(x.id) %> checked <% end %>>
               <%= x.name %>
             </td>
             <td>
-              <input type="radio" name="manager" value="<%= x.id %>" <% if manager_id == x.id %> checked <% end %>>
+              <input type="radio" name="event[manager]" value="<%= x.id %>" <% if manager_id == x.id %> checked <% end %>>
           <% end %>
         </td>
       </tr>
