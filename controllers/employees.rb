@@ -16,7 +16,7 @@ get "/delete_employee_form" do
 end
 
 get "/delete_employee_confirm" do
-  @employee_deleted = Employee.find(params["id"])
+  @employee_deleted = Employee.find(params["employee"]["id"])
   @employee_deleted.delete
   erb :"/main/home"
 end
