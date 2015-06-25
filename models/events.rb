@@ -41,5 +41,26 @@ class Event
     non_managers = DB.execute("SELECT employee_id FROM distributions WHERE event_id = #{@id} AND manager is null")
     @gratuity / non_managers.count
   end
+
+  # Checks to make sure underage employees aren't being added to an event
+  #   with alcohol.
+  # event - Hash (from a form) including "alcohol" => "yes" or => "no"
+  #         and employee_id which is an Array containing employee id numbers
+  # Returns True/False
+  def self.can_all_employees_work?(event)
+    @of_age = true
+  
+  # Goes through each employee added and makes sure they can serve booze
+    if event["alcohol"] == "yes"
+      event["employee_id"].each do |x|
+        employee = Employee.find(x)
+        # If the employee can't serve booze, this sets @of_age to false
+        if employee.can_serve_booze? == false
+          @of_age = false
+        end
+      end
+    end
+    @of_age
+  end
   
 end

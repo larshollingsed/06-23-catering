@@ -4,18 +4,8 @@ end
 
 get"/add_event_confirm" do
   # Sets of_age to true until made false
-  @of_age = true
-  
-  # Goes through each employee added and makes sure they can serve booze
-  if params["event"]["alcohol"] == "yes"
-    params["event"]["employee_id"].each do |x|
-      employee = Employee.find(x)
-      # If the employee can't serve booze, this sets @of_age to false
-      if employee.can_serve_booze? == false
-        @of_age = false
-      end
-    end
-  end
+  @of_age = Event.can_all_employees_work?(params["event"])
+  binding.pry
   
   # Checks to make sure @of_age is true.  If it is continues with adding the
   #   event and also adds it to the distributions table

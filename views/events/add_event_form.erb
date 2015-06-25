@@ -13,24 +13,24 @@
 <form action="/add_event_confirm">
   <ul>
     <li>
-      Name of Event - <input type="text" name="event[name]" placeholder="name of event" value="<%= params["event"]["name"] %>">
+      Name of Event - <input type="text" name="event[name]" placeholder="name of event" <% if params["event"] %> value="<%= params["event"]["name"] %>" <% end %>>
     </li>
     <li>
-      Date (MM-DD) - <input type="text" name="event[date]" placeholder="MM-DD" value="<%= params["event"]["date"] %>">
+      Date (MM-DD) - <input type="text" name="event[date]" placeholder="MM-DD" <% if params["event"] %> value="<%= params["event"]["date"] %>" <% end %>>
     </li>
     <li>
-      Length of event - <input type="number" step="0.25" name="event[hours]" placeholder="hours" value="<%= params["event"]["hours"] %>">
+      Length of event - <input type="number" step="0.25" name="event[hours]" placeholder="hours" <% if params["event"] %> value="<%= params["event"]["hours"] %>" <% end %>>
     </li>
     <li>
-      Hourly Wage - <input type"number" step="0.05" name="event[hourly_wage]" placeholder="$ per hour" value="<%= params["event"]["hourly_wage"] %>">
+      Hourly Wage - <input type"number" step="0.05" name="event[hourly_wage]" placeholder="$ per hour" <% if params["event"] %>value="<%= params["event"]["hourly_wage"] %>"<% end %>>
     </li>
     <li>
-      Total Gratuity - <input type="number" name="event[gratuity]" placeholder="gratuity" value="<%= params["event"]["gratuity"] %>">
+      Total Gratuity - <input type="number" name="event[gratuity]" placeholder="gratuity" <% if params["event"] %> value="<%= params["event"]["gratuity"] %>" <% end %>>
     </li>
     <li>
       Was alcohol served? 
-        <input type="radio" name="event[alcohol]" value="yes" <% if params["event"]["alcohol"] == "yes" %> checked <% end %> >Yes
-        <input type="radio" name="event[alcohol]" value="no" <% if params["event"]["alcohol"] == "no" %> checked <% end %> >No
+        <input type="radio" name="event[alcohol]" value="yes" <% if params["event"] %> <% if params["event"]["alcohol"] == "yes" %> checked <% end %> <% end %> >Yes
+        <input type="radio" name="event[alcohol]" value="no" <% if params["event"] %> <% if params["event"]["alcohol"] == "no" %> checked <% end %> <% end %> >No
     </li>
   </ul>
   
@@ -48,11 +48,11 @@
         <td>
           <!-- Each employee generates a row with a checkbox for if they -->
           <!-- and a radio button to signify one manager for the event -->
-          <input type="checkbox" name="event[employee_id][]" value="<%= x.id %>" <% if params["event"]["employee_id"].include?(x.id.to_s) %> checked <% end %>>
+          <input type="checkbox" name="event[employee_id][]" value="<%= x.id %>" <% if params["event"] %> <% if params["event"]["employee_id"].include?(x.id.to_s) %> checked <% end %> <% end %> >
             <%= x.name %>
         </td>
         <td>
-            <input type="radio" name="event[manager]" value="<%= x.id %>" <% if params["event"]["manager"] == x.id.to_s %> checked <% end %>>
+            <input type="radio" name="event[manager]" value="<%= x.id %>" <% if params["event"] %> <% if params["event"]["manager"] == x.id.to_s %> checked <% end %> <% end %> >
         </td>
       </tr>
     <% end %>
