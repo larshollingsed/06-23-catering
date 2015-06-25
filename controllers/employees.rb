@@ -30,7 +30,7 @@ get "/modify_employee_form2" do
 end
 
 get "/modify_employee_confirm" do
-  @employee_modified = Employee.new("id" => params["id"].to_i, "name" => params["name"], "age" => params["age"].to_i)
+  @employee_modified = Employee.new("id" => params["employee"]["id"].to_i, "name" => params["employee"]["name"], "age" => params["employee"]["age"].to_i)
   @employee_modified.save
   erb :"/main/home"
 end
