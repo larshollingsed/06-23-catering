@@ -4,6 +4,7 @@
 
 
 <% join = DB.execute("SELECT employees.name, events.name AS event_name, events.date, distributions.manager FROM distributions INNER JOIN employees ON distributions.employee_id = employees.id INNER JOIN events ON distributions.event_id = events.id") %>
+
 <table>
   <tr>
     <td>
@@ -62,13 +63,13 @@
         <%= x.name %>
       </td>
       <td>
-        <%= x.get_manager_wages %>
+        <%= sprintf('%.2f', x.get_manager_wages) %>
       </td>
       <td>
-        <%= x.get_base_wages %>
+        <%= sprintf('%.2f', x.get_base_wages) %>
       </td>
       <td>
-        <%= x.get_total_wages %>
+        <%= sprintf('%.2f', x.get_total_wages) %>
       </td>
     </tr>
   <% end %>

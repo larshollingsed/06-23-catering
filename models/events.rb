@@ -48,7 +48,7 @@ class Event
   #         and employee_id which is an Array containing employee id numbers
   # Returns True/False
   def self.can_all_employees_work?(event)
-    @of_age = true
+    of_age = true
   
   # Goes through each employee added and makes sure they can serve booze
   # Returns True/False
