@@ -1,13 +1,21 @@
 
-
+<!-- Creates a joined table with employee name, event name, event date -->
+<!-- if they were the manager, and the event_id (to be used not displayed)-->
 <% join = DB.execute("SELECT employees.name, events.name AS event_name, events.date, distributions.manager, distributions.event_id FROM distributions INNER JOIN employees ON distributions.employee_id = employees.id INNER JOIN events ON distributions.event_id = events.id") %>
 
 <% events_in_month = []
+# this calls the "in_month" method on Event based on the input from the form
+# and compiles an Array of Events
 event_objects_in_month = Event.in_month(params["wages"]["month"].to_i)
 event_ids_in_month = []
+
+# this gives an Array of just the event.id s
 event_objects_in_month.each do |x|
   event_ids_in_month << x.id
 end
+
+# this pulls out only the rows(from my joined table) where the event occured
+# in the month specified by the user
 join.each do |x|
   if event_ids_in_month.include?(x["event_id"])  
     events_in_month << x

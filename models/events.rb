@@ -77,22 +77,4 @@ class Event
     events
   end
   
-  # def calc_base_wage_for_event
-  #   employees_worked = DB.execute("SELECT employee_id FROM distributions WHERE event_id = #{@id} AND manager is null;")
-  #
-  #   employees_worked.each do |x|
-  #     x.
-  #
-    # set_of_events = []
-#     events_worked.each do |x|
-#       set_of_events << Event.find(x["event_id"].to_i)
-#     end
-#
-#     wages = 0
-#     set_of_events.each do |x|
-#       wages += x.calc_base_wage + x.split_gratuity
-#     end
-#     wages
-#   end
-  
 end
