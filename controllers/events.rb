@@ -46,7 +46,7 @@ end
 
 # Deletes the event and also deletes the associated rows in distributions
 get "/delete_event_confirm" do
-  @event_deleted = Event.find(params["id"])
+  @event_deleted = Event.find(params["event"]["id"])
   @event_deleted.delete
   DB.execute("DELETE FROM distributions WHERE event_id = #{@event_deleted.id}")
   erb :"/main/home"
