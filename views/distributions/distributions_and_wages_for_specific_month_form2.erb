@@ -1,0 +1,49 @@
+
+
+
+
+
+<h3>
+  Wages for the month
+</h3>
+<table>
+  <tr>
+    <td>
+      Employee
+    </td>
+    <td>
+      Non-manager Wages
+    </td>
+    <td>
+      Manager wages
+    </td>
+    <td>
+      Total Wages
+    </td>
+  </tr>
+  <% Employee.all.each do |x| %>
+    <tr>
+      <td>
+        <%= x.name %>
+      </td>
+      <td>
+        <%= x.get_base_wages_for_month(params["wages"]["month"].to_i) %>
+      </td>
+      <td>
+        <%= x.get_manager_wages_for_month(params["wages"]["month"].to_i) %>
+      </td>
+      <td>
+        <%= x.get_total_wages_for_month(params["wages"]["month"].to_i) %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<br>
+<br>
+<a href="/home">
+  Return to main menu
+</a>
+<br>
+<a href="/see_all_distributions_and_wages">
+  Go back to all distributions and wages
+</a>
