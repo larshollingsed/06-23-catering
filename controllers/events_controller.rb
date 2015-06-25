@@ -3,9 +3,8 @@ get "/add_event" do
 end
 
 get"/add_event_confirm" do
-  # Sets of_age to true until made false
+  # Sets of_age to true if all employees can work and false if they can't
   @of_age = Event.can_all_employees_work?(params["event"])
-  binding.pry
   
   # Checks to make sure @of_age is true.  If it is continues with adding the
   #   event and also adds it to the distributions table
