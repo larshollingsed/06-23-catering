@@ -51,16 +51,48 @@ class Event
     @of_age = true
   
   # Goes through each employee added and makes sure they can serve booze
+  # Returns True/False
     if event["alcohol"] == "yes"
       event["employee_id"].each do |x|
         employee = Employee.find(x)
         # If the employee can't serve booze, this sets @of_age to false
         if employee.can_serve_booze? == false
-          @of_age = false
+          of_age = false
         end
       end
     end
-    @of_age
+    of_age
   end
+  
+  # Gets a set of events that occured in a month
+  # month - Integer referring to the month number
+  # Returns an array of Events
+  def self.in_month(month)
+    events = []
+    Event.all.each do |x|
+      if x.date.to_i == month
+        events << x
+      end
+    end
+    events
+  end
+  
+  # def calc_base_wage_for_event
+  #   employees_worked = DB.execute("SELECT employee_id FROM distributions WHERE event_id = #{@id} AND manager is null;")
+  #
+  #   employees_worked.each do |x|
+  #     x.
+  #
+    # set_of_events = []
+#     events_worked.each do |x|
+#       set_of_events << Event.find(x["event_id"].to_i)
+#     end
+#
+#     wages = 0
+#     set_of_events.each do |x|
+#       wages += x.calc_base_wage + x.split_gratuity
+#     end
+#     wages
+#   end
   
 end

@@ -1,3 +1,11 @@
 get "/see_all_distributions_and_wages" do
   erb :"/distributions/see_all_distributions_and_wages"
 end
+
+get "/distributions_and_wages_for_specific_month_form1" do
+  erb :"/distributions/distributions_and_wages_for_specific_month_form1"
+end
+
+get "/distributions_and_wages_for_specific_month_form2" do
+  erb :"/distributions/distributions_and_wages_for_specific_month_form2"
+end

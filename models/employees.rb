@@ -52,10 +52,71 @@ class Employee
     end
     wages
   end
+  
   # Calculates total wages earn
   # Return a Float
   def get_total_wages
     self.get_base_wages + self.get_manager_wages
   end
+   
+  # Calculates base wages employee earned in one month
+  # month is an Integer of the month number
+  # Returns a Float
+  def get_base_wages_for_month(month)
+    events_worked = DB.execute("SELECT event_id FROM distributions WHERE employee_id = #{@id} AND manager is null;")
     
+    events_in_month = []
+    Event.in_month(month).each do |x|
+      events_in_month << x.id
+    end
+    
+    set_of_events = []
+    events_worked.each do |x|
+      set_of_events << x["event_id"].to_i
+    end
+    
+    events_employee_worked_this_month = set_of_events & events_in_month
+    
+    paid_events = []
+    events_employee_worked_this_month.each do |x|
+      paid_events << Event.find(x)
+    end
+    
+    wages = 0
+    paid_events.each do |x|
+      wages += x.calc_base_wage + x.split_gratuity
+    end
+    wages
+  end
+  
+  def get_manager_wages_for_month(month)
+    events_worked = DB.execute("SELECT event_id FROM distributions WHERE employee_id = #{@id} AND manager = 'yes';")
+    
+    events_in_month = []
+    Event.in_month(month).each do |x|
+      events_in_month << x.id
+    end
+    
+    set_of_events = []
+    events_worked.each do |x|
+      set_of_events << x["event_id"].to_i
+    end
+    
+    events_employee_worked_this_month = set_of_events & events_in_month
+    
+    paid_events = []
+    events_employee_worked_this_month.each do |x|
+      paid_events << Event.find(x)
+    end
+    
+    wages = 0
+    paid_events.each do |x|
+      wages += x.calc_manager_wage
+    end
+    wages
+  end
+  
+  def get_total_wages_for_month(month)
+    self.get_base_wages_for_month(month) + self.get_manager_wages_for_month(month)
+  end
 end
