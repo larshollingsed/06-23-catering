@@ -7,8 +7,8 @@ get"/add_event_confirm" do
   @of_age = true
   
   # Goes through each employee added and makes sure they can serve booze
-  if params["alcohol"] == "yes"
-    params["employee_id"].each do |x|
+  if params["event"]["alcohol"] == "yes"
+    params["event"]["employee_id"].each do |x|
       employee = Employee.find(x)
       # If the employee can't serve booze, this sets @of_age to false
       if employee.can_serve_booze? == false
@@ -20,10 +20,10 @@ get"/add_event_confirm" do
   # Checks to make sure @of_age is true.  If it is continues with adding the
   #   event and also adds it to the distributions table
   if @of_age
-    @event_added = Event.add("name" => params["name"], "date" => params["date"], "hours" => params["hours"].to_f, "hourly_wage" => params["hourly_wage"].to_f, "gratuity" => params["gratuity"].to_f, "alcohol" => params["alcohol"])
+    @event_added = Event.add("name" => params["event"]["name"], "date" => params["event"]["date"], "hours" => params["event"]["hours"].to_f, "hourly_wage" => params["event"]["hourly_wage"].to_f, "gratuity" => params["event"]["gratuity"].to_f, "alcohol" => params["event"]["alcohol"])
     # Adds a manager "tag" if the employee was managing that event
-    params["employee_id"].each do |x|
-      if params["manager"] == x
+    params["event"]["employee_id"].each do |x|
+      if params["event"]["manager"] == x
         Distribution.add({"event_id" => @event_added.id, "employee_id" => x.to_i, "manager" => "yes"})
       else
         Distribution.add({"event_id" => @event_added.id, "employee_id" => x.to_i})
@@ -67,7 +67,6 @@ get "/modify_event_confirm" do
   @event_modified.save
   
   DB.execute("DELETE FROM distributions where event_id = #{@event_modified.id};")
-  binding.pry
   # Adds new rows to distributions, including checking for manager
   params["event"]["employee_id"].each do |x|
     if params["event"]["manager"] == x

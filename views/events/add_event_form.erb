@@ -2,7 +2,7 @@
 <!--   tried to add an underage employee to an event with alcohol -->
 <!-- Gives them a message telling them who they tried to add who was underage-->
 <% if @of_age == false
-  params["employee_id"].each do |x|
+  params["event"]["employee_id"].each do |x|
     employee = Employee.find(x)
     if employee.can_serve_booze? == false %>
       <%= employee.name %> is underage and is not allowed to work at an event  which serves alcohol.
@@ -13,24 +13,24 @@
 <form action="/add_event_confirm">
   <ul>
     <li>
-      Name of Event - <input type="text" name="name" placeholder="name of event">
+      Name of Event - <input type="text" name="event[name]" placeholder="name of event">
     </li>
     <li>
-      Date (MM-DD) - <input type="text" name="date" placeholder="MM-DD">
+      Date (MM-DD) - <input type="text" name="event[date]" placeholder="MM-DD">
     </li>
     <li>
-      Length of event - <input type="number" step="0.25" name="hours" placeholder="hours">
+      Length of event - <input type="number" step="0.25" name="event[hours]" placeholder="hours">
     </li>
     <li>
-      Hourly Wage - <input type"number" step="0.05" name="hourly_wage" placeholder="$ per hour">
+      Hourly Wage - <input type"number" step="0.05" name="event[hourly_wage]" placeholder="$ per hour">
     </li>
     <li>
-      Total Gratuity - <input type="number" name="gratuity" placeholder="gratuity">
+      Total Gratuity - <input type="number" name="event[gratuity]" placeholder="gratuity">
     </li>
     <li>
       Was alcohol served? 
-        <input type="radio" name="alcohol" value="yes">Yes
-        <input type="radio" name="alcohol" value="no">No
+        <input type="radio" name="event[alcohol]" value="yes">Yes
+        <input type="radio" name="event[alcohol]" value="no">No
     </li>
   </ul>
   
@@ -48,11 +48,11 @@
         <td>
           <!-- Each employee generates a row with a checkbox for if they -->
           <!-- and a radio button to signify one manager for the event -->
-          <input type="checkbox" name="employee_id[]" value="<%= x.id %>">
+          <input type="checkbox" name="event[employee_id][]" value="<%= x.id %>">
             <%= x.name %>
         </td>
         <td>
-            <input type="radio" name="manager" value="<%= x.id %>">
+            <input type="radio" name="event[manager]" value="<%= x.id %>">
         </td>
       </tr>
     <% end %>
