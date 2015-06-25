@@ -7,7 +7,7 @@ get "/add_employee_form" do
 end
 
 get "/add_employee_confirm" do
-  @employee_added = Employee.add({"name" => params["name"], "age" => params["age"]})
+  @employee_added = Employee.add({"name" => params["employee"]["name"], "age" => params["employee"]["age"]})
   erb :"/main/home"
 end
 
