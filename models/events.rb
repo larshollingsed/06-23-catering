@@ -41,6 +41,14 @@ class Event
     non_managers = DB.execute("SELECT employee_id FROM distributions WHERE event_id = #{@id} AND manager is null")
     @gratuity / non_managers.count
   end
+  
+  def self.total_hours_of_events(paid_events)
+    hours = 0
+    paid_events.each do |x|
+      hours += x.hours
+    end
+    hours
+  end
 
   # Checks to make sure underage employees aren't being added to an event
   #   with alcohol.
@@ -142,6 +150,8 @@ class Event
     end
     paid_events
   end
+  
+  
   def self.calc_wages_for_set_of_events(set_of_events)
     wages = 0
     set_of_events.each do |x|

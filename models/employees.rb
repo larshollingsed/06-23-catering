@@ -65,7 +65,7 @@ class Employee
     #   and the events the employee has worked
     # events_employee_worked_this_month is an Array of event ids
     events_employee_worked_this_month = set_of_events & events_in_month
-    
+  
     paid_events = Event.event_ids_to_objects(events_employee_worked_this_month)
     Event.calc_wages_for_set_of_events(paid_events)
   end
@@ -93,39 +93,20 @@ class Employee
   end
   
   def get_hours_for_month(month)
-    # events_worked is an Array containing rows where this employee worked
-    events_worked = DB.execute("SELECT event_id FROM distributions WHERE employee_id = #{@id};")
+    events_worked = get_events_worked
     
-    # Creates an Array of the event.ids of events in a specific month
-    events_in_month = []
-    Event.in_month(month).each do |x|
-      events_in_month << x.id
-    end
+    events_in_month = Event.events_in_month_ids(month)
     
-    # This pulls out just the event_id from the Array from the database
-    set_of_events = []
-    events_worked.each do |x|
-      set_of_events << x["event_id"].to_i
-    end
+    set_of_events = Event.get_event_ids_from_objects(events_worked)
     
     # This uses "&" (intersection) to compare the event ids from the month
     #   and the events the employee has worked
     # events_employee_worked_this_month is an Array of event ids
     events_employee_worked_this_month = set_of_events & events_in_month
     
-    # Turns the Array of event ids into an Array of Event objects
-    paid_events = []
-    events_employee_worked_this_month.each do |x|
-      paid_events << Event.find(x)
-    end
+    paid_events = Event.event_ids_to_objects(events_employee_worked_this_month)
     
-    hours = 0
-    paid_events.each do |x|
-      hours += x.hours
-    end
-    hours
+    Event.total_hours_of_events(paid_events)
   end
-  
-  
   
 end
