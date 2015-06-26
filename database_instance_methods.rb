@@ -27,14 +27,27 @@ module DatabaseInstanceMethods
   def save
     instance_variables = self.instance_variables
  
-    attribute_hash = {}
+    attribute_hash = get_attribute_hash(instance_variables)
  
+    individual_instance_variables = get_individual_instance_variables(attribute_hash)
+ 
+    for_sql = join_for_sql(individual_instance_variables)
+    binding.pry
+    DB.execute("UPDATE #{table_name} SET #{for_sql} WHERE id = #{self.id}")
+ 
+    return self
+  end
+  
+  def get_attribute_hash(instance_variables)
+    attribute_hash = {}
     instance_variables.each do |variable|
       attribute_hash["#{variable.slice(1..-1)}"] = self.send("#{variable.slice(1..-1)}")
     end
- 
+    attribute_hash
+  end
+  
+  def get_individual_instance_variables(attribute_hash)
     individual_instance_variables = []
- 
     attribute_hash.each do |key, value|
       if value.is_a?(String)
         individual_instance_variables << "#{key} = '#{value}'"
@@ -42,12 +55,12 @@ module DatabaseInstanceMethods
         individual_instance_variables << "#{key} = #{value}"
       end
     end
- 
-    for_sql = individual_instance_variables.join(', ')
- 
-    DB.execute("UPDATE #{table_name} SET #{for_sql} WHERE id = #{self.id}")
- 
-    return self
+    individual_instance_variables
   end
+  
+  def join_for_sql(indiv)
+    indiv.join(', ')
+  end
+    
   
 end
