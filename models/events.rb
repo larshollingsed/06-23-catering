@@ -42,6 +42,9 @@ class Event
     @gratuity / non_managers.count
   end
   
+  # Adds all hours for a set of events
+  # paid_events is an Array of Events
+  # Returns a Float of hours worked
   def self.total_hours_of_events(paid_events)
     hours = 0
     paid_events.each do |x|
@@ -58,8 +61,8 @@ class Event
   def self.can_all_employees_work?(event)
     of_age = true
   
-  # Goes through each employee added and makes sure they can serve booze
-  # Returns True/False
+    # Goes through each employee added and makes sure they can serve booze
+    # Returns True/False
     if event["alcohol"] == "yes"
       event["employee_id"].each do |x|
         employee = Employee.find(x)
