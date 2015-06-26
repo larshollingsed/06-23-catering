@@ -3,9 +3,15 @@ require "active_support/inflector"
 
 module DatabaseInstanceMethods
 
+  # Creates a generalized table name for database modules
+  # Returns a String of the table name
+  def table_name
+    self.class.to_s.pluralize.downcase
+  end
+  
   # Deletes a row in a table
   def delete
-    table_name = self.class.to_s.pluralize.downcase
+
     DB.execute("DELETE FROM #{table_name} WHERE id = #{@id};")
   end
   
@@ -19,8 +25,6 @@ module DatabaseInstanceMethods
   end
   
   def save
-    table = self.class.to_s.pluralize.underscore
- 
     instance_variables = self.instance_variables
  
     attribute_hash = {}
@@ -41,7 +45,7 @@ module DatabaseInstanceMethods
  
     for_sql = individual_instance_variables.join(', ')
  
-    DB.execute("UPDATE #{table} SET #{for_sql} WHERE id = #{self.id}")
+    DB.execute("UPDATE #{table_name} SET #{for_sql} WHERE id = #{self.id}")
  
     return self
   end
