@@ -12,8 +12,8 @@ module DatabaseInstanceMethods
   def hash_to_object(x)  
     y = []
     x.each do |z|
-      product = Product.new(z)
-      y << product
+      item = self.new(z)
+      y << item
     end
     y
   end
