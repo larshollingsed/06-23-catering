@@ -1,16 +1,15 @@
-<% x = Employee.find(params["employee"]["id"]) %>
 <h1>
   Modify this employee and click submit
 </h1>
 
 <form action="modify_employee_confirm">
   <ul>
-    <input type="hidden" name="employee[id]" value="<%= x.id %>">
+    <input type="hidden" name="employee[id]" value="<%= @employee.id %>">
     <li> 
-      Name - <input type="text" name="employee[name]" value="<%= x.name %>">
+      Name - <input type="text" name="employee[name]" value="<%= @employee.name %>">
     </li>
     <li>
-      Age - <input type="number" name="employee[age]" value="<%= x.age %>">
+      Age - <input type="number" name="employee[age]" value="<%= @employee.age %>">
     </li>
   </ul>
   <input type="submit">  

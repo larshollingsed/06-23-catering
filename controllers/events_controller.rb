@@ -46,6 +46,9 @@ get "/modify_event_form1" do
 end
 
 get "/modify_event_form2" do
+  @event = Event.find(params["event"]["id"])
+  @employees_worked = @event.employees_who_worked
+  @manager_id = @event.get_manager_id
   erb :"/events/modify_event_form2"
 end
 

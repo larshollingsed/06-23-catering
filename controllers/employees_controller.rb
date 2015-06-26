@@ -26,6 +26,7 @@ get "/modify_employee_form1" do
 end
 
 get "/modify_employee_form2" do
+  @employee = Employee.find(params["employee"]["id"])
   erb :"/employees/modify_employee_form2"
 end
 

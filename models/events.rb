@@ -107,4 +107,19 @@ class Event
     events_in_month
   end
   
+  # Returns an array of employee_ids of those who worked this event
+  def employees_who_worked
+    employees_worked = []
+    
+    # gets employees who were designated as working this event previously
+    DB.execute("SELECT employee_id FROM distributions WHERE event_id = #{@id};").each do |x|
+      employees_worked << x["employee_id"]
+    end
+    employees_worked
+  end
+  
+  # Returns the employee_id of the manager for this event
+  def get_manager_id
+    DB.execute("SELECT employee_id FROM distributions WHERE manager = 'yes' and event_id = #{@id};")[0]["employee_id"]
+  end
 end
