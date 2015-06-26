@@ -19,25 +19,15 @@ class Employee
     self.age >= 19
   end
   
-  # Returns an Array of Hashes of rows from distributions where the employee worked
-  def get_events_worked
-    DB.execute("SELECT event_id FROM distributions WHERE employee_id = #{self.id} AND manager is null;")
-  end
-  
-  # Returns an Array of Hashes of rows from distributions where the employee managed
-  def get_events_managed
-    DB.execute("SELECT event_id FROM distributions WHERE employee_id = #{self.id} AND manager = 'yes';")
-  end
-  
   # Returns an Array of Hashes of events the employee both worked and managed
   def events_worked_and_managed
-    get_events_worked + get_events_managed
+    Distribution.get_events_worked(self.id) + Distribution.get_events_managed(self.id)
   end
   
   # Calculate the base wage for all events an employee worked but didn't manage
   # Returns a Float
   def get_base_wages
-    events_worked = get_events_worked
+    events_worked = Distribution.get_events_worked(self.id)
     set_of_events = Event.events_worked_to_objects(events_worked)
     Event.calc_wages_for_set_of_events(set_of_events)
   end
@@ -45,7 +35,7 @@ class Employee
   # Calculates the wages for all events an employee managed
   # Returns a Float
   def get_manager_wages
-    events_managed = get_events_managed
+    events_managed = Distribution.get_events_managed(self.id)
     set_of_events = Event.events_worked_to_objects(events_managed)
     Event.calc_manager_wages_for_set_of_events(set_of_events)
   end
@@ -60,7 +50,7 @@ class Employee
   # month - Integer of the month number
   # Returns a Float
   def get_base_wages_for_month(month)
-    events_worked = get_events_worked
+    events_worked = Distribution.get_events_worked(self.id)
     
     events_in_month = Event.events_in_month_ids(month)
 
@@ -79,7 +69,7 @@ class Employee
   # month - Integer referring to the month number
   # Returns a Float
   def get_manager_wages_for_month(month)
-    events_managed = get_events_managed
+    events_managed = Distribution.get_events_managed(self.id)
     
     events_in_month = Event.events_in_month_ids(month)
     

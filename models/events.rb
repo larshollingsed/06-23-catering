@@ -38,7 +38,7 @@ class Event
   # Splits the gratuity depending on how many non-managers worked the event
   # Returns a Float
   def split_gratuity
-    non_managers = DB.execute("SELECT employee_id FROM distributions WHERE event_id = #{self.id} AND manager is null")
+    non_managers = Distribution.get_non_managers(self.id)
     self.gratuity / non_managers.count
   end
   
@@ -123,16 +123,12 @@ class Event
     employees_worked = []
     
     # gets employees who were designated as working this event previously
-    DB.execute("SELECT employee_id FROM distributions WHERE event_id = #{self.id};").each do |x|
+    Distribution.who_worked_an_event(self.id).each do |x|
       employees_worked << x["employee_id"]
     end
     employees_worked
   end
-  
-  # Returns the employee_id of the manager for this event
-  def get_manager_id
-    DB.execute("SELECT employee_id FROM distributions WHERE manager = 'yes' and event_id = #{self.id};")[0]["employee_id"]
-  end
+
   
   # events_worked is an Array of Hashes from the database 
   # Returns an Array of Events

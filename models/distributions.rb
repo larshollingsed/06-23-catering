@@ -14,6 +14,29 @@ class Distribution
     @manager = args["manager"]
   end
   
+  # Returns an Array of Hashes of rows from distributions where the employee worked
+  def self.get_events_worked(employee_id)
+    DB.execute("SELECT event_id FROM distributions WHERE employee_id = #{employee_id} AND manager is null;")
+  end
+  
+  # Returns an Array of Hashes of rows from distributions where the employee managed
+  def self.get_events_managed(employee_id)
+    DB.execute("SELECT event_id FROM distributions WHERE employee_id = #{employee_id} AND manager = 'yes';")
+  end
+  
+  def self.get_non_managers(employee_id)
+    DB.execute("SELECT employee_id FROM distributions WHERE event_id = #{employee_id} AND manager is null")
+  end
+  
+  def self.who_worked_an_event(event_id)
+    DB.execute("SELECT employee_id FROM distributions WHERE event_id = #{event_id};")
+  end
+  
+  # Returns the employee_id of the manager for this event
+  def self.get_manager_id(event_id)
+    DB.execute("SELECT employee_id FROM distributions WHERE manager = 'yes' and event_id = #{event_id};")[0]["employee_id"]
+  end
+  
   # Returns a joined table with employee name, event name, event date
   # if they were the manager, and the event_id (to be used not displayed)
   def self.find_distributions_with_names
