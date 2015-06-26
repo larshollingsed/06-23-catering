@@ -20,4 +20,8 @@ class Distribution
     DB.execute("SELECT employees.name, events.name AS event_name, events.date, distributions.manager, distributions.event_id FROM distributions INNER JOIN employees ON distributions.employee_id = employees.id INNER JOIN events ON distributions.event_id = events.id")
   end
   
+  def self.delete_distributions_from_event(event_id)
+    DB.execute("DELETE FROM distributions WHERE event_id = #{event_id}")
+  end
+  
 end
