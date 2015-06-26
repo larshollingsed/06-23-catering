@@ -15,8 +15,7 @@ module DatabaseClassMethods
     array_of_hashes = DB.execute("SELECT * FROM #{table_name};")
     array_of_objects = []
     array_of_hashes.each do |one_hash|
-      object = self.new(one_hash)
-      array_of_objects << object
+      array_of_objects << self.new(one_hash)
     end
     array_of_objects
   end
