@@ -74,30 +74,17 @@ class Employee
   # month - Integer referring to the month number
   # Returns a Float
   def get_manager_wages_for_month(month)
-    events_worked = get_events_managed
+    events_managed = get_events_managed
     
-    events_in_month = []
-    Event.in_month(month).each do |x|
-      events_in_month << x.id
-    end
+    events_in_month = Event.events_in_month_ids(month)
     
-    set_of_events = []
-    events_worked.each do |x|
-      set_of_events << x["event_id"].to_i
-    end
+    set_of_events = Event.get_event_ids_from_objects(events_managed)
     
-    events_employee_worked_this_month = set_of_events & events_in_month
+    events_employee_managed_this_month = set_of_events & events_in_month
     
-    paid_events = []
-    events_employee_worked_this_month.each do |x|
-      paid_events << Event.find(x)
-    end
+    paid_events = Event.event_ids_to_objects(events_employee_managed_this_month)
     
-    wages = 0
-    paid_events.each do |x|
-      wages += x.calc_manager_wage
-    end
-    wages
+    Event.calc_manager_wages_for_set_of_events(paid_events)
   end
   
   # Calculates total wages for the month
