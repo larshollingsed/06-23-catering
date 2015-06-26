@@ -29,6 +29,11 @@ class Employee
     DB.execute("SELECT event_id FROM distributions WHERE employee_id = #{@id} AND manager = 'yes';")
   end
   
+  # Returns an Array of Hashes of events the employee both worked and managed
+  def events_worked_and_managed
+    get_events_worked + get_events_managed
+  end
+  
   # Calculate the base wage for all events an employee worked but didn't manage
   # Returns a Float
   def get_base_wages
@@ -93,7 +98,7 @@ class Employee
   end
   
   def get_hours_for_month(month)
-    events_worked = get_events_worked
+    events_worked = events_worked_and_managed
     
     events_in_month = Event.events_in_month_ids(month)
     
