@@ -36,10 +36,13 @@ module DatabaseClassMethods
     array_of_objects
   end
   
-  def add(args={})
+  def sql_column_names(args)
     column_names = args.keys
+    column_names.join(", ")
+  end
+  
+  def sql_values(args)
     values = args.values
-    column_names_for_sql = column_names.join(", ")
     individual_values_for_sql = []
     values.each do |value|
       if value.is_a?(String)
@@ -48,13 +51,23 @@ module DatabaseClassMethods
         individual_values_for_sql << value
       end  
     end
-    values_for_sql = individual_values_for_sql.join(", ")
+    individual_values_for_sql.join(", ")
+  end
 
-    DB.execute("INSERT INTO #{table_name} (#{column_names_for_sql}) VALUES (#{values_for_sql});")
-
+  def create_with_new_id(args)
     id = DB.last_insert_row_id
     args["id"] = id
 
     self.new(args)
   end
+  
+  def add(args={})
+    column_names_for_sql = sql_column_names(args)
+    values_for_sql = sql_values(args)
+
+    DB.execute("INSERT INTO #{table_name} (#{column_names_for_sql}) VALUES (#{values_for_sql});")
+
+    create_with_new_id(args)
+  end
+  
 end
