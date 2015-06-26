@@ -13,4 +13,13 @@ class Distribution
     @event_id = args["event_id"]
     @manager = args["manager"]
   end
+  
+  # Returns a joined table with employee name, event name, event date
+  # if they were the manager, and the event_id (to be used not displayed)
+  def self.find_distributions_with_names
+    DB.execute("SELECT employees.name, events.name AS event_name, events.date, distributions.manager, distributions.event_id FROM distributions INNER JOIN employees ON distributions.employee_id = employees.id INNER JOIN events ON distributions.event_id = events.id")
+  end
+  
+
+  
 end

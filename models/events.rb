@@ -77,4 +77,34 @@ class Event
     events
   end
   
+  # Returns an Array of event ids in that month
+  def self.event_ids_in_month(month)
+    events_in_month = []
+    # this calls the "in_month" method on Event based on the input from the form
+    # and compiles an Array of Events
+    event_objects_in_month = in_month(month)
+    event_ids_in_month = []
+    event_objects_in_month.each do |x|
+      event_ids_in_month << x.id
+    end
+    event_ids_in_month
+  end
+  
+  # Returns an Array containing Hashes with employee name, event name, event
+  #   date, manager, and event.id for a given month
+  def self.event_hashes_from_month(month)
+    table = Distribution.find_distributions_with_names
+    event_ids_in_month = Event.event_ids_in_month(month)
+
+    # this pulls out only the rows(from my joined table) where the event occured
+    # in the month specified by the user
+    events_in_month = []
+    table.each do |x|
+      if event_ids_in_month.include?(x["event_id"])  
+        events_in_month << x
+      end
+    end
+    events_in_month
+  end
+  
 end

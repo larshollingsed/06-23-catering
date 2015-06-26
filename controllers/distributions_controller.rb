@@ -7,5 +7,8 @@ get "/distributions_and_wages_for_specific_month_form1" do
 end
 
 get "/distributions_and_wages_for_specific_month_form2" do
+  @month = params["wages"]["month"].to_i
+  @events_in_month = Event.event_hashes_from_month(@month)
+  
   erb :"/distributions/distributions_and_wages_for_specific_month_form2"
 end
