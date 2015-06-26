@@ -55,7 +55,6 @@ get "/modify_event_confirm" do
   Distribution.delete_distributions_from_event(@event_modified.id)
 
   Distribution.add_distributions(params["event"], @event_added.id)
-  end
   
   erb :"/main/home"
 end

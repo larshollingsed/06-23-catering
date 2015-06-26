@@ -122,4 +122,56 @@ class Event
   def get_manager_id
     DB.execute("SELECT employee_id FROM distributions WHERE manager = 'yes' and event_id = #{@id};")[0]["employee_id"]
   end
+  
+  # events_worked is an Array of Hashes from the database 
+  # Returns an Array of Events
+  def self.events_worked_to_objects(events_worked)
+    set_of_events = []
+    events_worked.each do |x|
+      set_of_events << self.find(x["event_id"].to_i)
+    end
+    set_of_events
+  end
+  
+  # event_ids is an array of event ids
+  # Returns an Array of Events
+  def self.event_ids_to_objects(event_ids)
+    paid_events = []
+    event_ids.each do |x|
+      paid_events << Event.find(x)
+    end
+    paid_events
+  end
+  def self.calc_wages_for_set_of_events(set_of_events)
+    wages = 0
+    set_of_events.each do |x|
+      wages += x.calc_base_wage + x.split_gratuity
+    end
+    wages
+  end
+  
+  def self.calc_manager_wages_for_set_of_events(set_of_events)
+    wages = 0
+    set_of_events.each do |x|
+      wages += x.calc_manager_wage
+    end
+    wages
+  end
+  
+  # Creates an Array of the event.ids of events in a specific month
+  def self.events_in_month_ids(month)
+    events_in_month = []
+    Event.in_month(month).each do |x|
+      events_in_month << x.id
+    end
+    events_in_month
+  end
+  
+  def self.get_event_ids_from_objects(events_worked)
+    set_of_events = []
+    events_worked.each do |x|
+      set_of_events << x["event_id"].to_i
+    end
+    set_of_events
+  end
 end
