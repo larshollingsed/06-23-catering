@@ -16,17 +16,17 @@ class Employee
   # If the Employee is 19 or older they can serve alcohol
   # Returns True/False  
   def can_serve_booze?
-    @age >= 19
+    self.age >= 19
   end
   
   # Returns an Array of Hashes of rows from distributions where the employee worked
   def get_events_worked
-    DB.execute("SELECT event_id FROM distributions WHERE employee_id = #{@id} AND manager is null;")
+    DB.execute("SELECT event_id FROM distributions WHERE employee_id = #{self.id} AND manager is null;")
   end
   
   # Returns an Array of Hashes of rows from distributions where the employee managed
   def get_events_managed
-    DB.execute("SELECT event_id FROM distributions WHERE employee_id = #{@id} AND manager = 'yes';")
+    DB.execute("SELECT event_id FROM distributions WHERE employee_id = #{self.id} AND manager = 'yes';")
   end
   
   # Returns an Array of Hashes of events the employee both worked and managed

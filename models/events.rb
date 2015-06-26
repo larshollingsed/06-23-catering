@@ -20,26 +20,26 @@ class Event
   # Checks to see if the event served alcohol
   # Returns True/False
   def has_alcohol?
-    @alcohol == "yes"
+    self.alcohol == "yes"
   end
   
   # Calculates the base wage for non-manager for an event
   # Returns a Float
   def calc_base_wage
-    @hours * @hourly_wage
+    self.hours * self.hourly_wage
   end
   
   # Calculates the manager wage for an event
   # Returns a Float
   def calc_manager_wage
-    @hours * @hourly_wage * 2
+    self.hours * self.hourly_wage * 2
   end
   
   # Splits the gratuity depending on how many non-managers worked the event
   # Returns a Float
   def split_gratuity
-    non_managers = DB.execute("SELECT employee_id FROM distributions WHERE event_id = #{@id} AND manager is null")
-    @gratuity / non_managers.count
+    non_managers = DB.execute("SELECT employee_id FROM distributions WHERE event_id = #{self.id} AND manager is null")
+    self.gratuity / non_managers.count
   end
   
   # Adds all hours for a set of events
@@ -123,7 +123,7 @@ class Event
     employees_worked = []
     
     # gets employees who were designated as working this event previously
-    DB.execute("SELECT employee_id FROM distributions WHERE event_id = #{@id};").each do |x|
+    DB.execute("SELECT employee_id FROM distributions WHERE event_id = #{self.id};").each do |x|
       employees_worked << x["employee_id"]
     end
     employees_worked
@@ -131,7 +131,7 @@ class Event
   
   # Returns the employee_id of the manager for this event
   def get_manager_id
-    DB.execute("SELECT employee_id FROM distributions WHERE manager = 'yes' and event_id = #{@id};")[0]["employee_id"]
+    DB.execute("SELECT employee_id FROM distributions WHERE manager = 'yes' and event_id = #{self.id};")[0]["employee_id"]
   end
   
   # events_worked is an Array of Hashes from the database 
