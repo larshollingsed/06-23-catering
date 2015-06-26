@@ -1,4 +1,5 @@
 get "/see_all_distributions_and_wages" do
+  @table = Distribution.find_distributions_with_names
   erb :"/distributions/see_all_distributions_and_wages"
 end
 

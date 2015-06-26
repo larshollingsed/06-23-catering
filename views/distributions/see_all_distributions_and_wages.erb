@@ -2,9 +2,6 @@
   All Distributions
 </h1>
 
-
-<% join = DB.execute("SELECT employees.name, events.name AS event_name, events.date, distributions.manager FROM distributions INNER JOIN employees ON distributions.employee_id = employees.id INNER JOIN events ON distributions.event_id = events.id") %>
-
 <table>
   <tr>
     <td>
@@ -20,7 +17,7 @@
       Manager?
     </td>
   </tr>
-  <% join.each do |x| %>
+  <% @table.each do |x| %>
     <tr>
       <td>
         <%= x["name"] %>
