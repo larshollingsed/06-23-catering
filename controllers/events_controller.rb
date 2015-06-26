@@ -12,14 +12,6 @@ get"/add_event_confirm" do
     @event_added = Event.add("name" => params["event"]["name"], "date" => params["event"]["date"], "hours" => params["event"]["hours"].to_f, "hourly_wage" => params["event"]["hourly_wage"].to_f, "gratuity" => params["event"]["gratuity"].to_f, "alcohol" => params["event"]["alcohol"])
     
     Distribution.add_distributions(params["event"], @event_added.id)
-    # Adds a manager "tag" if the employee was managing that event
-    # params["event"]["employee_id"].each do |x|
-    #   if params["event"]["manager"] == x
-    #     Distribution.add({"event_id" => @event_added.id, "employee_id" => x.to_i, "manager" => "yes"})
-    #   else
-    #     Distribution.add({"event_id" => @event_added.id, "employee_id" => x.to_i})
-    #   end
-    # end
     erb :"/main/home"
   else
     # if @of_age was false, sends them back to the add event form
@@ -61,13 +53,8 @@ get "/modify_event_confirm" do
   @event_modified.save
   
   Distribution.delete_distributions_from_event(@event_modified.id)
-  # Adds new rows to distributions, including checking for manager
-  params["event"]["employee_id"].each do |x|
-    if params["event"]["manager"] == x
-      Distribution.add({"event_id" => @event_modified.id, "employee_id" => x.to_i, "manager" => "yes"})
-    else
-      Distribution.add({"event_id" => @event_modified.id, "employee_id" => x.to_i})
-    end
+
+  Distribution.add_distributions(params["event"], @event_added.id)
   end
   
   erb :"/main/home"
