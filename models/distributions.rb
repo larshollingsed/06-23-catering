@@ -24,4 +24,14 @@ class Distribution
     DB.execute("DELETE FROM distributions WHERE event_id = #{event_id}")
   end
   
+  def self.add_distributions(event_info, event_id)
+    event_info["employee_id"].each do |x|
+      if event_info["manager"] == x
+        Distribution.add({"event_id" => event_id, "employee_id" => x.to_i, "manager" => "yes"})
+      else
+        Distribution.add({"event_id" => event_id, "employee_id" => x.to_i})
+      end
+    end
+  end
+  
 end
