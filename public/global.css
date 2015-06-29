@@ -1,5 +1,6 @@
 html {
   box-sizing: border-box;
+  width: 450px;
 }
 
 *, *:before, *:after {
@@ -57,4 +58,11 @@ h3.confirm {
 
 #no_booze {
   background-color: pink;
+}
+
+#add_employee p {
+  text-align: center;
+  font-size: large;
+  margin-top: 15px;
+  margin-bottom: 15px
 }
