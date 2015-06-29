@@ -1,32 +1,34 @@
-<h3>
-  <% if @employee_added %>
-    A new employee, <%= @employee_added.name %>, has been added
-  <% end %>
+<header>
+    <h3 class="confirm">
+    <% if @employee_added %>
+  <p>A new employee, <%= @employee_added.name %>, has been added</p>
+    <% end %>
+    
+    <% if @employee_deleted %>
+  <p>An employee, <%= @employee_deleted.name %>, has been deleted</p>
+    <% end %>
+    
+    <% if @employee_modified %>
+  <p>An employee, <%= @employee_modified.name %>, has been modified</p>
+    <% end %>
+    
+    <% if @event_added %>
+  <p>An event, <%= @event_added.name %>, has been added</p>
+    <% end %>
+    
+    <% if @event_deleted %>
+  <p>An event, <%= @event_deleted.name %>, has been deleted</p>
+    <% end %>
+    
+    <% if @event_modified %>
+  <p>An event, <%= @event_modified.name %>, has been modified</p>
+    <% end %>
+  </h3>
   
-  <% if @employee_deleted %>
-    An employee, <%= @employee_deleted.name %>, has been deleted
-  <% end %>
-  
-  <% if @employee_modified %>
-    An employee, <%= @employee_modified.name %>, has been modified
-  <% end %>
-  
-  <% if @event_added %>
-    An event, <%= @event_added.name %>, has been added
-  <% end %>
-  
-  <% if @event_deleted %>
-    An event, <%= @event_deleted.name %>, has been deleted
-  <% end %>
-  
-  <% if @event_modified %>
-    An event, <%= @event_modified.name %>, has been modified
-  <% end %>
-</h3>
-
-<h1>
-  What would you like to do?
-</h1>
+  <h1>
+    What would you like to do?
+  </h1>
+</header>
 
 <a href="/see_all_employees">
   See all employees

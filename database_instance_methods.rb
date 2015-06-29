@@ -32,7 +32,7 @@ module DatabaseInstanceMethods
     individual_instance_variables = get_individual_instance_variables(attribute_hash)
  
     for_sql = join_for_sql(individual_instance_variables)
-    binding.pry
+
     DB.execute("UPDATE #{table_name} SET #{for_sql} WHERE id = #{self.id}")
  
     return self

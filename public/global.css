@@ -1,0 +1,60 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  width: 450px;
+}
+
+footer {
+  font-size: smaller;
+}
+
+footer nav p {
+  width: 450px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: large;
+    text-align: center;
+    background-color: aquamarine
+}
+
+h1 {
+  text-align: center;
+}
+
+h3.confirm {
+  font-size: large;
+  font-style: italic;
+  width: 450px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center
+}
+
+#employees {
+  width: 450px;
+}
+
+#employees tr th {
+  border-bottom: 2px black solid;
+  text-align: center;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  background-color: aliceblue;
+}
+
+#employees tr td {
+  text-align: center;
+  border-bottom: 1px black dotted;
+  margin: 0;
+}
+
+#no_booze {
+  background-color: pink;
+}
