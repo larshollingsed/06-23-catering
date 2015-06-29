@@ -1,33 +1,23 @@
-<table>
+<table id="employees">
   <tr>
-    <td>
-      ID
-    </td>
-    <td>
+    <th>
       Name
-    </td>
-    <td>
+    </th>
+    <th>
       Able to serve alcohol?
-    </td>
+    </th>
   </tr>
-  <% Employee.all.each do |x| %>
+  <% Employee.all.each do |employee| %>
     <tr>
       <td>
-        <%= x.id %>
+        <%= employee.name %>
       </td>
-      <td>
-        <%= x.name %>
-      </td>
-      <td>
-        <% if x.can_serve_booze? %>
-          Yes
+        <% if employee.can_serve_booze? %>
+          <td>Yes
         <% else %>
-          No
+          <td id="no_booze">No
         <% end %>
       </td>
     </tr>
   <% end %>
 </table>
-<br>
-<br>
-<a href="/home">Return to the main menu</a>
