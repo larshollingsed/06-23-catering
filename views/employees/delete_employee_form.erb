@@ -3,20 +3,20 @@
 </h1>
 
 <form action="/delete_employee_confirm">
-  <table>
-    <% Employee.all.each do |x| %>
+  <table id="delete_employee">
+    <% Employee.all.each do |employee| %>
       <tr>
         <td>
-          <label for="<%= x.id %>">
-          <input type="radio" name="employee[id]" value="<%= x.id%>" id="<%= x.id %>"><%= x.name%>
+          <label for="<%= employee.id %>">
+          <input type="radio" name="employee[id]" value="<%= employee.id%>" id="<%= employee.id %>"><%= employee.name%>
         </td>
         <td>
-          <%= x.age %>
+          <%= employee.age %>
         </td>
       </tr>
     <% end %>
   </table>
-  <br>
-  <br>
-  <input type="submit">
+  <p class="center">
+    <input type="submit">
+  </p>
 </form>

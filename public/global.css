@@ -66,3 +66,19 @@ h3.confirm {
   margin-top: 15px;
   margin-bottom: 15px
 }
+
+#delete_employee {
+  font-size: large;
+  width: 250px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#delete_employee tr {
+  background-color: aliceblue;
+}
+
+p.center {
+  text-align: center;
+}
