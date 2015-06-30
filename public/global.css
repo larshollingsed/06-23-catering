@@ -60,14 +60,7 @@ h3.confirm {
   background-color: pink;
 }
 
-#add_employee p {
-  text-align: center;
-  font-size: large;
-  margin-top: 15px;
-  margin-bottom: 15px
-}
-
-#delete_employee {
+#select_employee {
   font-size: large;
   width: 250px;
   text-align: center;
@@ -75,10 +68,13 @@ h3.confirm {
   margin-right: auto;
 }
 
-#delete_employee tr {
+#select_employee tr {
   background-color: aliceblue;
 }
 
 p.center {
   text-align: center;
+  font-size: large;
+  margin-top: 15px;
+  margin-bottom: 15px
 }

@@ -3,14 +3,14 @@
 </h1>
 
 <form action="modify_employee_confirm">
-  <ul>
     <input type="hidden" name="employee[id]" value="<%= @employee.id %>">
-    <li> 
-      Name - <input type="text" name="employee[name]" value="<%= @employee.name %>">
-    </li>
-    <li>
+    <p class="center"> 
+      Name - <input type="text" name="employee[name]" value="<%= @employee.name %>"> 
+    </p>
+    <p class="center">
       Age - <input type="number" name="employee[age]" value="<%= @employee.age %>">
-    </li>
-  </ul>
-  <input type="submit">  
+    </p>
+    <p class="center">
+      <input type="submit">
+    </p>
 </form>

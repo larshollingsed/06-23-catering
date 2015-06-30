@@ -3,7 +3,7 @@
 </h1>
 
 <form action="modify_employee_form2">
-  <table>
+  <table id="select_employee">
     <% Employee.all.each do |x| %>
       <tr>
         <td>
@@ -17,5 +17,5 @@
     <% end %>
   </table>
   <br>
-  <input type="submit">
+ <p class="center"> <input type="submit"> </p>
 </form>
