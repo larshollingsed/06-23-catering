@@ -39,7 +39,9 @@ h3.confirm {
 }
 
 #employees {
-  width: 450px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #employees tr th {
@@ -77,4 +79,16 @@ p.center {
   font-size: large;
   margin-top: 15px;
   margin-bottom: 15px
+}
+
+ul.center {
+ text-align: center; 
+ list-style-type: none;
+ font-size: large;
+ padding: 0;
+}
+
+li.center{
+  padding-top: 5px;
+  padding-bottom: 5px;
 }

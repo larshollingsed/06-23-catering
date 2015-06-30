@@ -2,26 +2,26 @@
   All Events
 </h1>
 
-<table>
+<table id="employees">
   <tr>
-    <td>
+    <th>
       Name
-    </td>
-    <td>
+    </th>
+    <th>
       Date
-    </td>
-    <td>
+    </th>
+    <th>
       Hours
-    </td>
-    <td>
+    </th>
+    <th>
       Hourly Wage
-    </td>
-    <td>
+    </th>
+    <th>
       Gratuity
-    </td>
-    <td>
+    </th>
+    <th>
       Was alcohol served?
-    </td>
+    </th>
   </tr>
   <% Event.all.each do |x| %>
     <tr>
@@ -50,6 +50,3 @@
     </tr>
   <% end %>
 </table>
-<br>
-<br>
-<a href="/home">Return to main menu</a>
