@@ -29,13 +29,15 @@ h1 {
   text-align: center;
 }
 
+h3 {
+  text-align: center;
+}
 h3.confirm {
   font-size: large;
   font-style: italic;
   width: 450px;
   margin-top: 10px;
   margin-bottom: 10px;
-  text-align: center
 }
 
 #events {

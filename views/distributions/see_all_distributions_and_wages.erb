@@ -2,20 +2,20 @@
   All Distributions
 </h1>
 
-<table>
+<table id="events">
   <tr>
-    <td>
+    <th>
       Employee
-    </td>
-    <td>
+    </th>
+    <th>
       Event
-    </td>
-    <td>
+    </th>
+    <th>
       Date
-    </td>
-    <td>
+    </th>
+    <th>
       Manager?
-    </td>
+    </th>
   </tr>
   <% @table.each do |x| %>
     <tr>
@@ -39,20 +39,20 @@
 <h3>
   All Employee Earnings
 </h3>
-<table>
+<table id="events">
   <tr>
-    <td>
+    <th>
       Name
-    </td>
-    <td>
+    </th>
+    <th>
       Manager Wages
-    </td>
-    <td>
+    </th>
+    <th>
       Non-Manager Wages
-    </td>
-    <td>
+    </th>
+    <th>
       Total Earnings
-    </td>
+    </th>
   </tr>
   <% Employee.all.each do |x| %>
     <tr>
