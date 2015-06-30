@@ -1,26 +1,26 @@
 <h1>
   Choose an event to delete
 </h1>
-<table>
+<table id="events">
   <tr>
-    <td>
+    <th>
       Name
-    </td>
-    <td>
+    </th>
+    <th>
       Date
-    </td>
-    <td>
+    </th>
+    <th>
       Hours
-    </td>
-    <td>
+    </th>
+    <th>
       Hourly Wage
-    </td>
-    <td>
+    </th>
+    <th>
       Gratuity
-    </td>
-    <td>
+    </th>
+    <th>
       Was alcohol served?
-    </td>
+    </th>
   </tr>
   <form action="/delete_event_confirm">
     <% Event.all.each do |x| %>
@@ -52,7 +52,7 @@
       </tr>
     <% end %>
 </table>
-<br>
-<br>
-<input type="submit">
+<p class="center">
+  <input type="submit">
+</p>
 </form>

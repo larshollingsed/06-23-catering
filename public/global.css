@@ -38,6 +38,24 @@ h3.confirm {
   text-align: center
 }
 
+#events {
+  width: 450px;
+}
+
+#events tr th {
+  border-bottom: 2px black solid;
+  text-align: center;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  background-color: aliceblue;
+}
+
+#events tr td {
+  text-align: center;
+  border-bottom: 1px black dotted;
+  margin: 0;
+}
+
 #employees {
   width: 300px;
   margin-left: auto;
@@ -89,6 +107,18 @@ ul.center {
 }
 
 li.center{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+#center ul {
+  text-align: center; 
+  list-style-type: none;
+  font-size: large;
+  padding: 0;
+}
+
+#center ul li {
   padding-top: 5px;
   padding-bottom: 5px;
 }

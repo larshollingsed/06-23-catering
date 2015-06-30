@@ -2,26 +2,26 @@
   Which event would you like to modify?
 </h1>
 
-<table>
+<table id="events">
   <tr>
-    <td>
+    <th>
       Name
-    </td>
-    <td>
+    </th>
+    <th>
       Date
-    </td>
-    <td>
+    </th>
+    <th>
       Hours
-    </td>
-    <td>
+    </th>
+    <th>
       Hourly Wage
-    </td>
-    <td>
+    </th>
+    <th>
       Gratuity
-    </td>
-    <td>
+    </th>
+    <th>
       Was alcohol served?
-    </td>
+    </th>
   </tr>
   <form action="/modify_event_form2">
     <% Event.all.each do |x| %>
@@ -53,7 +53,7 @@
       </tr>
     <% end %>
 </table>
-<br>
-<br>
-<input type="submit">
+<p class="center">
+  <input type="submit">
+</p>
 </form>
