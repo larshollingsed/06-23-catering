@@ -17,13 +17,13 @@ footer {
 }
 
 footer nav a {
-  width: 450px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-size: large;
-    text-align: center;
-    background-color: aquamarine;
-    display: block;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: large;
+  text-align: center;
+  background-color: aquamarine;
+  display: block;
 }
 
 h1 {
@@ -127,5 +127,22 @@ li.center{
 }
 
 @media (min-width: 450px) {
+  div.column_nav {
+    width: 33%;
+    float: left;
+  }
   
+  footer nav a {
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  div.three_column_break {
+    clear: both;
+  }
+  
+  div.three_columns {
+    background: aquamarine;
+  }
 }
