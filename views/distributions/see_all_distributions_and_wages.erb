@@ -1,76 +1,79 @@
 <h1>
   All Distributions
 </h1>
-
-<table id="events">
-  <tr>
-    <th>
-      Employee
-    </th>
-    <th>
-      Event
-    </th>
-    <th>
-      Date
-    </th>
-    <th>
-      Manager?
-    </th>
-  </tr>
-  <% @table.each do |x| %>
+<div class="two_columns">
+  <table id="events">
     <tr>
-      <td>
-        <%= x["name"] %>
-      </td>
-      <td>
-        <%= x["event_name"] %>
-      </td>
-      <td>
-        <%= x["date"] %>
-      </td>
-      <td>
-        <%= x["manager"] %>
-      </td>
+      <th>
+        Employee
+      </th>
+      <th>
+        Event
+      </th>
+      <th>
+        Date
+      </th>
+      <th>
+        Manager?
+      </th>
     </tr>
-  <% end %>
-</table>
-<br>
-<br>
-<h3>
-  All Employee Earnings
-</h3>
-<table id="events">
-  <tr>
-    <th>
-      Name
-    </th>
-    <th>
-      Manager Wages
-    </th>
-    <th>
-      Non-Manager Wages
-    </th>
-    <th>
-      Total Earnings
-    </th>
-  </tr>
-  <% Employee.all.each do |x| %>
+    <% @table.each do |x| %>
+      <tr>
+        <td>
+          <%= x["name"] %>
+        </td>
+        <td>
+          <%= x["event_name"] %>
+        </td>
+        <td>
+          <%= x["date"] %>
+        </td>
+        <td>
+          <%= x["manager"] %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<div class="two_columns">
+  <h3>
+    All Employee Earnings
+  </h3>
+  <table id="events">
     <tr>
-      <td>
-        <%= x.name %>
-      </td>
-      <td>
-        <%= sprintf('%.2f', x.get_manager_wages) %>
-      </td>
-      <td>
-        <%= sprintf('%.2f', x.get_base_wages) %>
-      </td>
-      <td>
-        <%= sprintf('%.2f', x.get_total_wages) %>
-      </td>
+      <th>
+        Name
+      </th>
+      <th>
+        Manager Wages
+      </th>
+      <th>
+        Non-Manager Wages
+      </th>
+      <th>
+        Total Earnings
+      </th>
     </tr>
-  <% end %>
-</table>
+    <% Employee.all.each do |x| %>
+      <tr>
+        <td>
+          <%= x.name %>
+        </td>
+        <td>
+          <%= sprintf('%.2f', x.get_manager_wages) %>
+        </td>
+        <td>
+          <%= sprintf('%.2f', x.get_base_wages) %>
+        </td>
+        <td>
+          <%= sprintf('%.2f', x.get_total_wages) %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<div style="clear:both">
+</div>
 <br>
 <a href="/distributions_and_wages_for_specific_month_form1"> 
   See distributions and wages for a specific month

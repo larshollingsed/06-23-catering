@@ -1,6 +1,5 @@
 html {
   box-sizing: border-box;
-  width: 450px;
 }
 
 *, *:before, *:after {
@@ -9,7 +8,6 @@ html {
 
 body {
   margin: 0;
-  width: 450px;
 }
 
 footer {
@@ -36,13 +34,13 @@ h3 {
 h3.confirm {
   font-size: large;
   font-style: italic;
-  width: 450px;
+  width: 100%;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
 #events {
-  width: 450px;
+  width: 100%;
 }
 
 #events tr th {
@@ -60,7 +58,7 @@ h3.confirm {
 }
 
 #employees {
-  width: 300px;
+  width: 75%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -126,7 +124,7 @@ li.center{
   padding-bottom: 5px;
 }
 
-@media (min-width: 450px) {
+@media (min-width: 500px) {
   div.column_nav {
     width: 33%;
     float: left;
@@ -144,5 +142,12 @@ li.center{
   
   div.three_columns {
     background: aquamarine;
+  }
+}
+
+@media (min-width: 700px) {
+  div.two_columns {
+    float: left;
+    width: 50%;
   }
 }
