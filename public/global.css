@@ -16,13 +16,14 @@ footer {
   font-size: smaller;
 }
 
-footer nav p {
+footer nav a {
   width: 450px;
     margin-top: 10px;
     margin-bottom: 10px;
     font-size: large;
     text-align: center;
-    background-color: aquamarine
+    background-color: aquamarine;
+    display: block;
 }
 
 h1 {
@@ -123,4 +124,8 @@ li.center{
 #center ul li {
   padding-top: 5px;
   padding-bottom: 5px;
+}
+
+@media (min-width: 450px) {
+  
 }
