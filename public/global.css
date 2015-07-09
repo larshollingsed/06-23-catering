@@ -14,7 +14,7 @@ footer {
   font-size: smaller;
 }
 
-header nav a {
+nav a {
   width: 100%;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -126,11 +126,21 @@ li.center{
 
 @media (min-width: 500px) {
   div.column_nav {
-    width: 33%;
+    /*width: 33%;*/
+    /*float: left;*/
+  }
+
+  div#body_content {
+    width: 70%;
     float: left;
   }
-  
-  header nav a {
+
+  body nav {
+    float: left;
+    width: 20%;
+  }
+
+  nav a {
     display: inline-block;
     padding-left: 10px;
     padding-right: 10px;
@@ -152,6 +162,8 @@ li.center{
   nav.hide_dis_nav {
     visibility: visible;
     position: static;
+    float: left;
+    width: 30%;
   }
 }
 
@@ -164,7 +176,7 @@ li.center{
 }
 
 
-img#hambuger {
+img#hamburger {
   position: absolute;
   top: 26%;
   right: 2%;

@@ -13,74 +13,80 @@
 
 
     </div>
-    <nav id="menu_nav" class="hide_dis_nav">
-      <div class="three_columns">
-        <div class="column_nav">
-          <a href="/see_all_employees">
-            See all employees
-          </a>
-        </div>
-        <div class="column_nav">
-          <a href="/add_employee_form">
-            Add a new employee
-          </a>
-        </div>
-        <div class="column_nav">
-          <a href="/delete_employee_form">
-            Delete an employee
-          </a>
-        </div>
-        <div class="three_column_break">
-        </div>
-        <div class="column_nav">
-          <a href="/modify_employee_form1">
-            Modify an employee
-          </a>
-        </div>
-        <div class="column_nav">
-          <a href="/see_all_events">
-            See all events
-          </a>
-        </div>
-        <div class="column_nav">
-          <a href="/add_event">
-            Add an event
-          </a>
-        </div>
-        <div class="three_column_break">
-        </div>
-        <div class="column_nav">
-          <a href="/delete_event_form">
-            Delete an event
-          </a>
-        </div>
-        <div class="column_nav">
-          <a href="/modify_event_form1">
-            Modify an event
-          </a>
-        </div>
-        <div class="column_nav">
-          <a href="/see_all_distributions_and_wages">
-            See all distributions and wages
-          </a>
-        </div>
-        <div class="three_column_break">
-        </div>
-      </div>
-    </nav>
 
 
 
   </header>
   
   <body>
-    
-    <%= yield %>
-    
-    <footer>
 
-      Never trust a skinny cook.
-    </footer>
+  <nav id="menu_nav" class="hide_dis_nav">
+    <div class="three_columns">
+      <div class="column_nav">
+        <a href="/see_all_employees">
+          See all employees
+        </a>
+      </div>
+      <div class="column_nav">
+        <a href="/add_employee_form">
+          Add a new employee
+        </a>
+      </div>
+      <div class="column_nav">
+        <a href="/delete_employee_form">
+          Delete an employee
+        </a>
+      </div>
+      <div class="three_column_break">
+      </div>
+      <div class="column_nav">
+        <a href="/modify_employee_form1">
+          Modify an employee
+        </a>
+      </div>
+      <div class="column_nav">
+        <a href="/see_all_events">
+          See all events
+        </a>
+      </div>
+      <div class="column_nav">
+        <a href="/add_event">
+          Add an event
+        </a>
+      </div>
+      <div class="three_column_break">
+      </div>
+      <div class="column_nav">
+        <a href="/delete_event_form">
+          Delete an event
+        </a>
+      </div>
+      <div class="column_nav">
+        <a href="/modify_event_form1">
+          Modify an event
+        </a>
+      </div>
+      <div class="column_nav">
+        <a href="/see_all_distributions_and_wages">
+          See all distributions and wages
+        </a>
+      </div>
+      <div class="three_column_break">
+      </div>
+    </div>
+  </nav>
+
+  <div id="body_content">
+  <%= yield %>
+  </div>
+    <div style="clear:both">
+    </div>
+
+  <footer>
+
+    Never trust a skinny cook.
+  </footer>
   </body>
+
 <script src="/global.js" type="text/javascript"></script>
 </html>
