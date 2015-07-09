@@ -14,7 +14,7 @@ footer {
   font-size: smaller;
 }
 
-footer nav a {
+header nav a {
   width: 100%;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -130,7 +130,7 @@ li.center{
     float: left;
   }
   
-  footer nav a {
+  header nav a {
     display: inline-block;
     padding-left: 10px;
     padding-right: 10px;
@@ -150,4 +150,28 @@ li.center{
     float: left;
     width: 50%;
   }
+}
+
+
+img#hambuger {
+  position: absolute;
+  top: 26%;
+  right: 2%;
+}
+
+header h3 {
+  text-align: center;
+  display: inline-block;
+  width: 70%;
+  padding: 5px;
+}
+
+div#mobile_header {
+  background-color: brown;
+  position: relative;
+}
+
+.hide_dis_nav {
+  visibility: hidden;
+  position: absolute;
 }
