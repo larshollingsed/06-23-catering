@@ -143,6 +143,16 @@ li.center{
   div.three_columns {
     background: aquamarine;
   }
+
+  header #mobile_header {
+    visibility: hidden;
+    position: absolute;
+  }
+
+  nav.hide_dis_nav {
+    visibility: visible;
+    position: static;
+  }
 }
 
 @media (min-width: 700px) {
@@ -150,6 +160,7 @@ li.center{
     float: left;
     width: 50%;
   }
+
 }
 
 
@@ -166,7 +177,7 @@ header h3 {
   padding: 5px;
 }
 
-div#mobile_header {
+#mobile_header {
   background-color: brown;
   position: relative;
 }
